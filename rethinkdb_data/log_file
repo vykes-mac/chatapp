@@ -1,0 +1,23 @@
+2021-02-28T21:34:57.828707000 0.015836s notice: Recursively removing directory /Users/VykesMac/repos/chatapp/rethinkdb_data/tmp
+2021-02-28T21:34:57.830414000 0.017546s notice: Initializing directory /Users/VykesMac/repos/chatapp/rethinkdb_data
+2021-02-28T21:34:57.830569000 0.017700s info: Creating a default database for your convenience. (This is because you ran 'rethinkdb' without 'create', 'serve', or '--join', and the directory '/Users/VykesMac/repos/chatapp/rethinkdb_data' did not already exist or is empty.)
+2021-02-28T21:34:57.830632000 0.017760s notice: Running rethinkdb 2.4.0 (CLANG 11.0.3 (clang-1103.0.32.62))...
+2021-02-28T21:34:57.844966000 0.032095s notice: Running on Darwin 20.3.0 x86_64
+2021-02-28T21:34:57.845042000 0.032170s notice: Loading data from directory /Users/VykesMac/repos/chatapp/rethinkdb_data
+2021-02-28T21:34:58.004490000 0.191617s info: Automatically using cache size of 286 MB
+2021-02-28T21:34:58.007184000 0.194310s notice: Listening for intracluster connections on port 29015
+2021-02-28T21:34:58.008665000 0.195791s notice: Listening for client driver connections on port 28015
+2021-02-28T21:34:58.008730000 0.195857s notice: Listening for administrative HTTP connections on port 8080
+2021-02-28T21:34:58.008749000 0.195875s notice: Listening on cluster addresses: 127.0.0.1, ::1
+2021-02-28T21:34:58.008756000 0.195881s notice: Listening on driver addresses: 127.0.0.1, ::1
+2021-02-28T21:34:58.008762000 0.195888s notice: Listening on http addresses: 127.0.0.1, ::1
+2021-02-28T21:34:58.008769000 0.195895s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2021-02-28T21:34:58.008779000 0.195904s notice: Server ready, "my_mac_local_6do" 57e7a003-55e6-4e08-b9a9-b8eecd8d349e
+2021-02-28T21:35:52.810509000 54.996826s info: Table e66b3352-9722-4152-91c2-0f455bca2e3a: Starting a new Raft election for term 1.
+2021-02-28T21:35:52.810718000 54.997035s info: Table e66b3352-9722-4152-91c2-0f455bca2e3a: Added replica on this server.
+2021-02-28T21:35:52.831189000 55.017506s info: Table e66b3352-9722-4152-91c2-0f455bca2e3a: This server is Raft leader for term 1. Latest log index is 0.
+2021-02-28T21:53:04.509446000 1086.716854s notice: Removing file /Users/VykesMac/repos/chatapp/rethinkdb_data/e66b3352-9722-4152-91c2-0f455bca2e3a
+2021-02-28T21:53:04.509456000 1086.716864s info: Table e66b3352-9722-4152-91c2-0f455bca2e3a: Deleted the table.
+2021-02-28T22:15:00.429333000 2402.639422s info: Table 824ef189-4553-46da-813e-e48496560b68: Starting a new Raft election for term 1.
+2021-02-28T22:15:00.429737000 2402.639827s info: Table 824ef189-4553-46da-813e-e48496560b68: Added replica on this server.
+2021-02-28T22:15:00.454477000 2402.664566s info: Table 824ef189-4553-46da-813e-e48496560b68: This server is Raft leader for term 1. Latest log index is 0.
