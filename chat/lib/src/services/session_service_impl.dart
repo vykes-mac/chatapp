@@ -2,6 +2,8 @@ import 'package:chat/src/models/session.dart';
 import 'package:chat/src/services/session_service.dart';
 import 'package:rethinkdb_dart/rethinkdb_dart.dart';
 
+import '../models/session.dart';
+
 class SessionService implements ISessionService {
   final Connection _connection;
   final Rethinkdb r;
@@ -26,14 +28,28 @@ class SessionService implements ISessionService {
   }
 
   @override
-  Future<bool> disconnect(Session session) {
-    // TODO: implement disconnect
-    throw UnimplementedError();
+  Future<void> disconnect(Session session) async {
+    await r.table('sessions').update({
+      'id': session.id,
+      'active': false,
+      'last_seen': DateTime.now(),
+    }).run(_connection);
+    _connection.close();
   }
 
   @override
-  Future<List<Session>> online() {
-    // TODO: implement online
-    throw UnimplementedError();
+  Future<List<Session>> online() async {
+    Cursor sessions =
+        await r.table('sessions').filter({'active': true}).run(_connection);
+
+    final sessionsList = await sessions.toList();
+    return sessionsList
+        .map(
+          (item) => Session(
+              id: item['id'],
+              active: item['active'],
+              lastSeen: item['last_seen']),
+        )
+        .toList();
   }
 }

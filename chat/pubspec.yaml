@@ -12,6 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   rethinkdb_dart: ^2.3.2+6
+  supercharged: ^2.0.0
 
 dev_dependencies:
   flutter_test:

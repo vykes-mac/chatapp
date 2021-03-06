@@ -21,3 +21,139 @@
 2021-02-28T22:15:00.429333000 2402.639422s info: Table 824ef189-4553-46da-813e-e48496560b68: Starting a new Raft election for term 1.
 2021-02-28T22:15:00.429737000 2402.639827s info: Table 824ef189-4553-46da-813e-e48496560b68: Added replica on this server.
 2021-02-28T22:15:00.454477000 2402.664566s info: Table 824ef189-4553-46da-813e-e48496560b68: This server is Raft leader for term 1. Latest log index is 0.
+2021-03-05T23:06:46.832943000 32029.190541s notice: Removing file /Users/VykesMac/repos/chatapp/rethinkdb_data/824ef189-4553-46da-813e-e48496560b68
+2021-03-05T23:06:46.833086000 32029.190682s info: Table 824ef189-4553-46da-813e-e48496560b68: Deleted the table.
+2021-03-05T23:08:34.387362000 32136.754248s info: Table c1984e49-e8a7-46d4-acd8-add4843a6741: Starting a new Raft election for term 1.
+2021-03-05T23:08:34.388773000 32136.755659s info: Table c1984e49-e8a7-46d4-acd8-add4843a6741: Added replica on this server.
+2021-03-05T23:08:34.433769000 32136.800655s info: Table c1984e49-e8a7-46d4-acd8-add4843a6741: This server is Raft leader for term 1. Latest log index is 0.
+2021-03-05T23:20:50.975454000 32873.327192s notice: Server got SIGINT from pid 1178, uid 501; shutting down...
+2021-03-05T23:20:50.976550000 32873.328288s notice: Shutting down client connections...
+2021-03-05T23:20:50.977185000 32873.328923s notice: All client connections closed.
+2021-03-05T23:20:50.977195000 32873.328933s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2021-03-05T23:20:50.992433000 32873.344171s notice: Storage engine shut down.
+2021-03-05T23:56:07.623024000 0.044909s notice: Running rethinkdb 2.4.0 (CLANG 11.0.3 (clang-1103.0.32.62))...
+2021-03-05T23:56:07.637230000 0.059112s notice: Running on Darwin 20.3.0 x86_64
+2021-03-05T23:56:07.637292000 0.059173s notice: Loading data from directory /Users/VykesMac/repos/chatapp/rethinkdb_data
+2021-03-05T23:56:07.686939000 0.108818s info: Automatically using cache size of 337 MB
+2021-03-05T23:56:07.690237000 0.112116s notice: Listening for intracluster connections on port 29015
+2021-03-05T23:56:07.710540000 0.132419s notice: Listening for client driver connections on port 28015
+2021-03-05T23:56:07.710635000 0.132514s notice: Listening for administrative HTTP connections on port 8080
+2021-03-05T23:56:07.710637000 0.132516s notice: Listening on cluster addresses: 127.0.0.1, ::1
+2021-03-05T23:56:07.710699000 0.132577s notice: Listening on driver addresses: 127.0.0.1, ::1
+2021-03-05T23:56:07.710701000 0.132579s notice: Listening on http addresses: 127.0.0.1, ::1
+2021-03-05T23:56:07.710708000 0.132586s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2021-03-05T23:56:07.710709000 0.132588s notice: Server ready, "my_mac_local_6do" 57e7a003-55e6-4e08-b9a9-b8eecd8d349e
+2021-03-05T23:56:09.554277000 1.976112s info: Table c1984e49-e8a7-46d4-acd8-add4843a6741: Starting a new Raft election for term 2.
+2021-03-05T23:56:09.583792000 2.005625s info: Table c1984e49-e8a7-46d4-acd8-add4843a6741: This server is Raft leader for term 2. Latest log index is 2.
+2021-03-06T00:04:48.182763000 520.592018s info: Table 7fb1a1c2-87a1-45f8-9cc4-816738b155b7: Starting a new Raft election for term 1.
+2021-03-06T00:04:48.182942000 520.592197s info: Table 7fb1a1c2-87a1-45f8-9cc4-816738b155b7: Added replica on this server.
+2021-03-06T00:04:48.227962000 520.637215s info: Table 7fb1a1c2-87a1-45f8-9cc4-816738b155b7: This server is Raft leader for term 1. Latest log index is 0.
+2021-03-06T00:06:01.619374000 594.026851s info: Table 9c9db708-44e6-4fdf-a640-c24455d40e20: Added replica on this server.
+2021-03-06T00:06:01.619384000 594.026861s info: Table 9c9db708-44e6-4fdf-a640-c24455d40e20: Starting a new Raft election for term 1.
+2021-03-06T00:06:01.666614000 594.074089s info: Table 9c9db708-44e6-4fdf-a640-c24455d40e20: This server is Raft leader for term 1. Latest log index is 0.
+2021-03-06T00:06:42.438173000 634.770992s info: Table 59ba5a18-3a64-4b8d-aa05-9b238920ce0f: Starting a new Raft election for term 1.
+2021-03-06T00:06:42.439059000 634.771878s info: Table 59ba5a18-3a64-4b8d-aa05-9b238920ce0f: Added replica on this server.
+2021-03-06T00:06:42.463202000 634.796019s info: Table 59ba5a18-3a64-4b8d-aa05-9b238920ce0f: This server is Raft leader for term 1. Latest log index is 0.
+2021-03-06T00:09:13.453609000 785.781892s notice: Removing file /Users/VykesMac/repos/chatapp/rethinkdb_data/59ba5a18-3a64-4b8d-aa05-9b238920ce0f
+2021-03-06T00:09:13.453617000 785.781899s info: Table 59ba5a18-3a64-4b8d-aa05-9b238920ce0f: Deleted the table.
+2021-03-06T00:09:27.709980000 800.037836s info: Table e4e2b8db-c03b-4a32-8c4d-0fc036ccc8ac: Starting a new Raft election for term 1.
+2021-03-06T00:09:27.710119000 800.037975s info: Table e4e2b8db-c03b-4a32-8c4d-0fc036ccc8ac: Added replica on this server.
+2021-03-06T00:09:27.730843000 800.058697s info: Table e4e2b8db-c03b-4a32-8c4d-0fc036ccc8ac: This server is Raft leader for term 1. Latest log index is 0.
+2021-03-06T00:10:45.344906000 877.670433s notice: Removing file /Users/VykesMac/repos/chatapp/rethinkdb_data/e4e2b8db-c03b-4a32-8c4d-0fc036ccc8ac
+2021-03-06T00:10:45.344918000 877.670444s info: Table e4e2b8db-c03b-4a32-8c4d-0fc036ccc8ac: Deleted the table.
+2021-03-06T00:11:40.173821000 932.497698s info: Table 2b6c36c9-b39a-43fe-a9c7-a4adf2465180: Starting a new Raft election for term 1.
+2021-03-06T00:11:40.174020000 932.497897s info: Table 2b6c36c9-b39a-43fe-a9c7-a4adf2465180: Added replica on this server.
+2021-03-06T00:11:40.195949000 932.519825s info: Table 2b6c36c9-b39a-43fe-a9c7-a4adf2465180: This server is Raft leader for term 1. Latest log index is 0.
+2021-03-06T00:11:41.092314000 933.416164s notice: Removing file /Users/VykesMac/repos/chatapp/rethinkdb_data/2b6c36c9-b39a-43fe-a9c7-a4adf2465180
+2021-03-06T00:11:41.092323000 933.416172s info: Table 2b6c36c9-b39a-43fe-a9c7-a4adf2465180: Deleted the table.
+2021-03-06T00:11:57.292342000 949.615705s info: Table 2adb16bd-2b29-4da4-b301-5676b808e015: Starting a new Raft election for term 1.
+2021-03-06T00:11:57.293798000 949.617161s info: Table 2adb16bd-2b29-4da4-b301-5676b808e015: Added replica on this server.
+2021-03-06T00:11:57.317038000 949.640400s info: Table 2adb16bd-2b29-4da4-b301-5676b808e015: This server is Raft leader for term 1. Latest log index is 0.
+2021-03-06T00:11:58.228664000 950.551999s notice: Removing file /Users/VykesMac/repos/chatapp/rethinkdb_data/2adb16bd-2b29-4da4-b301-5676b808e015
+2021-03-06T00:11:58.228673000 950.552008s info: Table 2adb16bd-2b29-4da4-b301-5676b808e015: Deleted the table.
+2021-03-06T00:35:31.613992000 2363.871061s info: Table 27eeb0c2-5bf5-43d5-84d6-87c5be0d0e99: Starting a new Raft election for term 1.
+2021-03-06T00:35:31.614296000 2363.871365s info: Table 27eeb0c2-5bf5-43d5-84d6-87c5be0d0e99: Added replica on this server.
+2021-03-06T00:35:31.636797000 2363.893865s info: Table 27eeb0c2-5bf5-43d5-84d6-87c5be0d0e99: This server is Raft leader for term 1. Latest log index is 0.
+2021-03-06T00:35:32.525889000 2364.782930s notice: Removing file /Users/VykesMac/repos/chatapp/rethinkdb_data/27eeb0c2-5bf5-43d5-84d6-87c5be0d0e99
+2021-03-06T00:35:32.525898000 2364.782939s info: Table 27eeb0c2-5bf5-43d5-84d6-87c5be0d0e99: Deleted the table.
+2021-03-06T13:35:50.709032000 9259.734610s info: Table fb435b2e-6e52-4010-9290-4a8f55dc8fec: Starting a new Raft election for term 1.
+2021-03-06T13:35:50.713134000 9259.738708s info: Table fb435b2e-6e52-4010-9290-4a8f55dc8fec: Added replica on this server.
+2021-03-06T13:35:50.745455000 9259.771029s info: Table fb435b2e-6e52-4010-9290-4a8f55dc8fec: This server is Raft leader for term 1. Latest log index is 0.
+2021-03-06T13:35:51.702624000 9260.728175s notice: Removing file /Users/VykesMac/repos/chatapp/rethinkdb_data/fb435b2e-6e52-4010-9290-4a8f55dc8fec
+2021-03-06T13:35:51.702634000 9260.728186s info: Table fb435b2e-6e52-4010-9290-4a8f55dc8fec: Deleted the table.
+2021-03-06T13:36:52.673518000 9321.697706s info: Table 4bef6c20-6cce-4a80-b692-be047995931d: Starting a new Raft election for term 1.
+2021-03-06T13:36:52.673746000 9321.697934s info: Table 4bef6c20-6cce-4a80-b692-be047995931d: Added replica on this server.
+2021-03-06T13:36:52.695828000 9321.720015s info: Table 4bef6c20-6cce-4a80-b692-be047995931d: This server is Raft leader for term 1. Latest log index is 0.
+2021-03-06T13:36:53.633706000 9322.657872s notice: Removing file /Users/VykesMac/repos/chatapp/rethinkdb_data/4bef6c20-6cce-4a80-b692-be047995931d
+2021-03-06T13:36:53.633718000 9322.657883s info: Table 4bef6c20-6cce-4a80-b692-be047995931d: Deleted the table.
+2021-03-06T13:37:49.302850000 9378.325772s info: Table cbec21a9-c131-4a3f-b290-d99bc249343a: Starting a new Raft election for term 1.
+2021-03-06T13:37:49.303464000 9378.326386s info: Table cbec21a9-c131-4a3f-b290-d99bc249343a: Added replica on this server.
+2021-03-06T13:37:49.328447000 9378.351368s info: Table cbec21a9-c131-4a3f-b290-d99bc249343a: This server is Raft leader for term 1. Latest log index is 0.
+2021-03-06T13:37:50.266274000 9379.289174s notice: Removing file /Users/VykesMac/repos/chatapp/rethinkdb_data/cbec21a9-c131-4a3f-b290-d99bc249343a
+2021-03-06T13:37:50.266417000 9379.289318s info: Table cbec21a9-c131-4a3f-b290-d99bc249343a: Deleted the table.
+2021-03-06T13:38:33.783592000 9422.805659s info: Table 4aa80eaa-56cf-46d0-a1a3-2226f858a354: Starting a new Raft election for term 1.
+2021-03-06T13:38:33.783849000 9422.805916s info: Table 4aa80eaa-56cf-46d0-a1a3-2226f858a354: Added replica on this server.
+2021-03-06T13:38:33.808155000 9422.830222s info: Table 4aa80eaa-56cf-46d0-a1a3-2226f858a354: This server is Raft leader for term 1. Latest log index is 0.
+2021-03-06T13:38:34.729178000 9423.751235s notice: Removing file /Users/VykesMac/repos/chatapp/rethinkdb_data/4aa80eaa-56cf-46d0-a1a3-2226f858a354
+2021-03-06T13:38:34.729187000 9423.751243s info: Table 4aa80eaa-56cf-46d0-a1a3-2226f858a354: Deleted the table.
+2021-03-06T13:38:57.576284000 9446.597967s info: Table 9562af4e-89fd-4504-b3ff-5bc8cefc884c: Starting a new Raft election for term 1.
+2021-03-06T13:38:57.576543000 9446.598227s info: Table 9562af4e-89fd-4504-b3ff-5bc8cefc884c: Added replica on this server.
+2021-03-06T13:38:57.597900000 9446.619584s info: Table 9562af4e-89fd-4504-b3ff-5bc8cefc884c: This server is Raft leader for term 1. Latest log index is 0.
+2021-03-06T13:39:19.368766000 9468.389993s notice: Removing file /Users/VykesMac/repos/chatapp/rethinkdb_data/9562af4e-89fd-4504-b3ff-5bc8cefc884c
+2021-03-06T13:39:19.368778000 9468.390005s info: Table 9562af4e-89fd-4504-b3ff-5bc8cefc884c: Deleted the table.
+2021-03-06T13:40:18.946671000 9527.966576s info: Table 06c19e4c-ea93-4b2f-89cf-f6b043bae273: Starting a new Raft election for term 1.
+2021-03-06T13:40:18.946822000 9527.966727s info: Table 06c19e4c-ea93-4b2f-89cf-f6b043bae273: Added replica on this server.
+2021-03-06T13:40:18.967466000 9527.987371s info: Table 06c19e4c-ea93-4b2f-89cf-f6b043bae273: This server is Raft leader for term 1. Latest log index is 0.
+2021-03-06T13:40:19.880256000 9528.900140s notice: Removing file /Users/VykesMac/repos/chatapp/rethinkdb_data/06c19e4c-ea93-4b2f-89cf-f6b043bae273
+2021-03-06T13:40:19.880265000 9528.900149s info: Table 06c19e4c-ea93-4b2f-89cf-f6b043bae273: Deleted the table.
+2021-03-06T13:43:42.495353000 9731.510708s info: Table 8e86d994-d3c1-4e6a-852a-2b6ad620f3ad: Starting a new Raft election for term 1.
+2021-03-06T13:43:42.495514000 9731.510869s info: Table 8e86d994-d3c1-4e6a-852a-2b6ad620f3ad: Added replica on this server.
+2021-03-06T13:43:42.516449000 9731.531804s info: Table 8e86d994-d3c1-4e6a-852a-2b6ad620f3ad: This server is Raft leader for term 1. Latest log index is 0.
+2021-03-06T13:46:44.229886000 9913.241180s notice: Removing file /Users/VykesMac/repos/chatapp/rethinkdb_data/8e86d994-d3c1-4e6a-852a-2b6ad620f3ad
+2021-03-06T13:46:44.229899000 9913.241192s info: Table 8e86d994-d3c1-4e6a-852a-2b6ad620f3ad: Deleted the table.
+2021-03-06T13:46:44.561436000 9913.572722s info: Table 9854df12-4ce9-4790-818a-86652995aa5f: Starting a new Raft election for term 1.
+2021-03-06T13:46:44.561745000 9913.573031s info: Table 9854df12-4ce9-4790-818a-86652995aa5f: Added replica on this server.
+2021-03-06T13:46:44.582381000 9913.593667s info: Table 9854df12-4ce9-4790-818a-86652995aa5f: This server is Raft leader for term 1. Latest log index is 0.
+2021-03-06T13:46:45.496125000 9914.507390s notice: Removing file /Users/VykesMac/repos/chatapp/rethinkdb_data/9854df12-4ce9-4790-818a-86652995aa5f
+2021-03-06T13:46:45.496138000 9914.507403s info: Table 9854df12-4ce9-4790-818a-86652995aa5f: Deleted the table.
+2021-03-06T13:47:28.373762000 9957.384068s info: Table b0c2622c-0d94-4959-b02f-3496cfacf32b: Starting a new Raft election for term 1.
+2021-03-06T13:47:28.373986000 9957.384292s info: Table b0c2622c-0d94-4959-b02f-3496cfacf32b: Added replica on this server.
+2021-03-06T13:47:28.448676000 9957.458981s info: Table b0c2622c-0d94-4959-b02f-3496cfacf32b: This server is Raft leader for term 1. Latest log index is 0.
+2021-03-06T13:47:28.694133000 9957.704432s info: Table d9f3792e-0ea9-4e78-aa86-d816f438d85a: Starting a new Raft election for term 1.
+2021-03-06T13:47:28.694347000 9957.704646s info: Table d9f3792e-0ea9-4e78-aa86-d816f438d85a: Added replica on this server.
+2021-03-06T13:47:28.739095000 9957.749394s info: Table d9f3792e-0ea9-4e78-aa86-d816f438d85a: This server is Raft leader for term 1. Latest log index is 0.
+2021-03-06T13:47:29.816235000 9958.826510s notice: Removing file /Users/VykesMac/repos/chatapp/rethinkdb_data/d9f3792e-0ea9-4e78-aa86-d816f438d85a
+2021-03-06T13:47:29.816244000 9958.826518s info: Table d9f3792e-0ea9-4e78-aa86-d816f438d85a: Deleted the table.
+2021-03-06T13:47:30.122571000 9959.132838s info: Table 13b4f0a4-9020-4926-b9c3-e0f861927450: Starting a new Raft election for term 1.
+2021-03-06T13:47:30.122707000 9959.132974s info: Table 13b4f0a4-9020-4926-b9c3-e0f861927450: Added replica on this server.
+2021-03-06T13:47:30.166730000 9959.176997s info: Table 13b4f0a4-9020-4926-b9c3-e0f861927450: This server is Raft leader for term 1. Latest log index is 0.
+2021-03-06T13:50:27.328190000 10136.328008s info: Table af081c0a-62a8-4f8b-a91c-b61dcc771ec0: Starting a new Raft election for term 1.
+2021-03-06T13:50:27.328426000 10136.328244s info: Table af081c0a-62a8-4f8b-a91c-b61dcc771ec0: Added replica on this server.
+2021-03-06T13:50:27.348849000 10136.348667s info: Table af081c0a-62a8-4f8b-a91c-b61dcc771ec0: This server is Raft leader for term 1. Latest log index is 0.
+2021-03-06T13:50:28.270009000 10137.269805s notice: Removing file /Users/VykesMac/repos/chatapp/rethinkdb_data/af081c0a-62a8-4f8b-a91c-b61dcc771ec0
+2021-03-06T13:50:28.270020000 10137.269815s info: Table af081c0a-62a8-4f8b-a91c-b61dcc771ec0: Deleted the table.
+2021-03-06T13:50:28.594681000 10137.594471s info: Table a3984f2e-195d-4527-ba7d-cbf4aa20e4e7: Starting a new Raft election for term 1.
+2021-03-06T13:50:28.595488000 10137.595276s info: Table a3984f2e-195d-4527-ba7d-cbf4aa20e4e7: Added replica on this server.
+2021-03-06T13:50:28.621406000 10137.621194s info: Table a3984f2e-195d-4527-ba7d-cbf4aa20e4e7: This server is Raft leader for term 1. Latest log index is 0.
+2021-03-06T13:50:29.518980000 10138.518745s notice: Removing file /Users/VykesMac/repos/chatapp/rethinkdb_data/a3984f2e-195d-4527-ba7d-cbf4aa20e4e7
+2021-03-06T13:50:29.518987000 10138.518752s info: Table a3984f2e-195d-4527-ba7d-cbf4aa20e4e7: Deleted the table.
+2021-03-06T13:50:41.718098000 10150.717569s info: Table 8becf09f-6952-4105-b063-aec43a216660: Added replica on this server.
+2021-03-06T13:50:41.718228000 10150.717701s info: Table 8becf09f-6952-4105-b063-aec43a216660: Starting a new Raft election for term 1.
+2021-03-06T13:50:41.743551000 10150.743022s info: Table 8becf09f-6952-4105-b063-aec43a216660: This server is Raft leader for term 1. Latest log index is 0.
+2021-03-06T13:50:42.657564000 10151.657013s notice: Removing file /Users/VykesMac/repos/chatapp/rethinkdb_data/8becf09f-6952-4105-b063-aec43a216660
+2021-03-06T13:50:42.657572000 10151.657021s info: Table 8becf09f-6952-4105-b063-aec43a216660: Deleted the table.
+2021-03-06T13:50:42.918541000 10151.917983s info: Table 50151c92-fa6e-4cc5-be99-d89325dcd8f7: Starting a new Raft election for term 1.
+2021-03-06T13:50:42.918849000 10151.918292s info: Table 50151c92-fa6e-4cc5-be99-d89325dcd8f7: Added replica on this server.
+2021-03-06T13:50:42.940962000 10151.940404s info: Table 50151c92-fa6e-4cc5-be99-d89325dcd8f7: This server is Raft leader for term 1. Latest log index is 0.
+2021-03-06T13:50:43.837984000 10152.837405s notice: Removing file /Users/VykesMac/repos/chatapp/rethinkdb_data/50151c92-fa6e-4cc5-be99-d89325dcd8f7
+2021-03-06T13:50:43.837993000 10152.837413s info: Table 50151c92-fa6e-4cc5-be99-d89325dcd8f7: Deleted the table.
+2021-03-06T13:50:55.582724000 10164.581862s info: Table e728ed1c-b57b-45ae-ac33-1ba4b272c5ce: Starting a new Raft election for term 1.
+2021-03-06T13:50:55.582948000 10164.582086s info: Table e728ed1c-b57b-45ae-ac33-1ba4b272c5ce: Added replica on this server.
+2021-03-06T13:50:55.604850000 10164.603988s info: Table e728ed1c-b57b-45ae-ac33-1ba4b272c5ce: This server is Raft leader for term 1. Latest log index is 0.
+2021-03-06T13:50:56.509844000 10165.508959s notice: Removing file /Users/VykesMac/repos/chatapp/rethinkdb_data/e728ed1c-b57b-45ae-ac33-1ba4b272c5ce
+2021-03-06T13:50:56.509852000 10165.508967s info: Table e728ed1c-b57b-45ae-ac33-1ba4b272c5ce: Deleted the table.
+2021-03-06T13:50:56.761348000 10165.760458s info: Table 1a436e88-98ca-43e2-93ce-99b10e59b6c7: Starting a new Raft election for term 1.
+2021-03-06T13:50:56.761460000 10165.760570s info: Table 1a436e88-98ca-43e2-93ce-99b10e59b6c7: Added replica on this server.
+2021-03-06T13:50:56.788338000 10165.787448s info: Table 1a436e88-98ca-43e2-93ce-99b10e59b6c7: This server is Raft leader for term 1. Latest log index is 0.
+2021-03-06T13:50:57.678427000 10166.677514s notice: Removing file /Users/VykesMac/repos/chatapp/rethinkdb_data/1a436e88-98ca-43e2-93ce-99b10e59b6c7
+2021-03-06T13:50:57.678435000 10166.677522s info: Table 1a436e88-98ca-43e2-93ce-99b10e59b6c7: Deleted the table.
