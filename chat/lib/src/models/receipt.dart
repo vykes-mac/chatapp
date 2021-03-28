@@ -14,24 +14,33 @@ extension EnumParsing on ReceiptStatus {
 }
 
 class Receipt {
-  final String id;
+  String get id => _id;
   final String recipient;
   final String messageId;
   final ReceiptStatus status;
   final DateTime timestamp;
+  String _id;
 
   Receipt(
-      {@required this.id,
-      @required this.recipient,
+      {@required this.recipient,
       @required this.messageId,
       @required this.status,
       @required this.timestamp});
 
   Map<String, dynamic> toJson() => {
-        'id': this.id,
         'recipient': this.recipient,
         'message_id': this.messageId,
         'status': status.value(),
         'timestamp': timestamp
       };
+
+  factory Receipt.fromJson(Map<String, dynamic> json) {
+    var receipt = Receipt(
+        recipient: json['recipient'],
+        messageId: json['message_id'],
+        status: EnumParsing.fromString(json['status']),
+        timestamp: json['timestamp']);
+    receipt._id = json['id'];
+    return receipt;
+  }
 }

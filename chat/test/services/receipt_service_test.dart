@@ -30,7 +30,6 @@ void main() {
 
   test('sent receipt successfully', () async {
     Receipt receipt = Receipt(
-        id: '123',
         recipient: '444',
         messageId: '1234',
         status: ReceiptStatus.deliverred,
@@ -46,14 +45,12 @@ void main() {
         }, count: 2));
 
     Receipt receipt = Receipt(
-        id: '123',
         recipient: session.id,
         messageId: '1234',
         status: ReceiptStatus.deliverred,
         timestamp: DateTime.now());
 
     Receipt anotherReceipt = Receipt(
-        id: '1235',
         recipient: session.id,
         messageId: '1234',
         status: ReceiptStatus.read,

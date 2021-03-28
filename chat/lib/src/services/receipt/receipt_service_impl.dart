@@ -55,11 +55,6 @@ class ReceiptService implements IReceiptService {
   }
 
   Receipt _receiptFromFeed(feedData) {
-    return Receipt(
-        id: feedData['new_val']['id'],
-        recipient: feedData['new_val']['recipient'],
-        messageId: feedData['new_val']['message_id'],
-        status: EnumParsing.fromString(feedData['new_val']['status']),
-        timestamp: feedData['new_val']['timestamp']);
+    return Receipt.fromJson(feedData['new_val']);
   }
 }
