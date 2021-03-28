@@ -50,6 +50,7 @@ class MessageService implements IMessageService {
 
                 final message = _messageFromFeed(feedData);
                 _controller.sink.add(message);
+                _removeDeliverredMessage(message);
               })
               .catchError((err) => print(err))
               .onError((error, stackTrace) => print(error));
@@ -65,5 +66,12 @@ class MessageService implements IMessageService {
 
   Message _messageFromFeed(feedData) {
     return Message.fromJson(feedData['new_val']);
+  }
+
+  _removeDeliverredMessage(Message message) {
+    r
+        .table('messages')
+        .get(message.id)
+        .delete({'return_changes': false}).run(_connection);
   }
 }

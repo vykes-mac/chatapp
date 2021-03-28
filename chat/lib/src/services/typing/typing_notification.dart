@@ -23,9 +23,9 @@ class TypingNotification implements ITypingNotification {
   @override
   Future<bool> send({@required TypingEvent event, @required Session to}) async {
     if (!to.active) return false;
-    Map record = await _r.table('typing_events').insert(
-        {'to': event.to, 'from': event.from, 'event': event.event.value()},
-        {'conflict': 'update'}).run(_connection);
+    Map record = await _r
+        .table('typing_events')
+        .insert(event.toJson(), {'conflict': 'update'}).run(_connection);
     return record['inserted'] == 1;
   }
 
@@ -54,6 +54,7 @@ class TypingNotification implements ITypingNotification {
 
                 final typing = _eventFromFeed(feedData);
                 _controller.sink.add(typing);
+                _removeEvent(typing);
               })
               .catchError((err) => print(err))
               .onError((error, stackTrace) => print(error));
@@ -61,9 +62,13 @@ class TypingNotification implements ITypingNotification {
   }
 
   TypingEvent _eventFromFeed(feedData) {
-    return TypingEvent(
-        from: feedData['new_val']['from'],
-        to: feedData['new_val']['to'],
-        event: TypingParser.fromString(feedData['new_val']['event']));
+    return TypingEvent.fromJson(feedData['new_val']);
+  }
+
+  _removeEvent(TypingEvent event) {
+    _r
+        .table('typing_events')
+        .get(event.id)
+        .delete({'return_changes': false}).run(_connection);
   }
 }

@@ -18,7 +18,7 @@ void main() {
   });
 
   tearDown(() async {
-    await sut.dispose();
+    sut.dispose();
     await cleanDb(r, connection);
   });
 
