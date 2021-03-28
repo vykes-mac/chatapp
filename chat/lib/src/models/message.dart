@@ -3,23 +3,31 @@ import 'package:flutter/foundation.dart';
 class Message {
   final String from;
   final String to;
-  final String id;
-  final DateTime date;
+  String get id => _id;
+  final DateTime timestamp;
   final String contents;
+  String _id;
 
   Message({
-    @required this.id,
     @required this.from,
     @required this.to,
-    @required this.date,
+    @required this.timestamp,
     @required this.contents,
   });
 
   toJson() => {
-        'id': this.id,
         'from': this.from,
         'to': this.to,
         'date': DateTime.now(),
         'contents': this.contents,
       };
+  factory Message.fromJson(Map<String, dynamic> json) {
+    var message = Message(
+        to: json['to'],
+        from: json['from'],
+        contents: json['contents'],
+        timestamp: json['timestamp']);
+    message._id = json['id'];
+    return message;
+  }
 }

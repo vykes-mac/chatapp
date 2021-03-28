@@ -35,10 +35,9 @@ void main() {
   });
   test('sent message successfully', () async {
     Message message = Message(
-      id: '123',
       from: session.id,
       to: '3456',
-      date: DateTime.now(),
+      timestamp: DateTime.now(),
       contents: 'this is a message',
     );
 
@@ -49,21 +48,20 @@ void main() {
   test('successfully subscribe and receive messages', () async {
     sut.messages(activeSession: session2).listen(expectAsync1((message) {
           expect(message.to, session2.id);
+          expect(message.id, isNotEmpty);
         }, count: 2));
 
     Message message = Message(
-      id: '123',
       from: session.id,
       to: session2.id,
-      date: DateTime.now(),
+      timestamp: DateTime.now(),
       contents: 'this is a message',
     );
 
     Message secondMessage = Message(
-      id: '1234',
       from: session.id,
       to: session2.id,
-      date: DateTime.now(),
+      timestamp: DateTime.now(),
       contents: 'this is another message',
     );
 
@@ -73,18 +71,16 @@ void main() {
 
   test('successfully subscribe and receive new messages ', () async {
     Message message = Message(
-      id: '123',
       from: session.id,
       to: session2.id,
-      date: DateTime.now(),
+      timestamp: DateTime.now(),
       contents: 'this is a message',
     );
 
     Message secondMessage = Message(
-      id: '1234',
       from: session.id,
       to: session2.id,
-      date: DateTime.now(),
+      timestamp: DateTime.now(),
       contents: 'this is another message',
     );
 

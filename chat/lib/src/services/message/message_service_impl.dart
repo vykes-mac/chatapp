@@ -64,11 +64,6 @@ class MessageService implements IMessageService {
   }
 
   Message _messageFromFeed(feedData) {
-    return Message(
-        id: feedData['new_val']['id'],
-        from: feedData['new_val']['from'],
-        to: feedData['new_val']['to'],
-        contents: feedData['new_val']['contents'],
-        date: feedData['new_val']['date']);
+    return Message.fromJson(feedData['new_val']);
   }
 }
