@@ -813,3 +813,32 @@
 2021-03-27T18:09:22.784790000 92773.852181s info: Table 846134c8-8f76-4ada-87e5-15fa54804ca1: Deleted the table.
 2021-03-27T18:09:22.822149000 92773.889540s notice: Removing file /Users/VykesMac/repos/chatapp/rethinkdb_data/b35b1e0d-226d-4a43-80da-46bc45227122
 2021-03-27T18:09:22.822159000 92773.889549s info: Table b35b1e0d-226d-4a43-80da-46bc45227122: Deleted the table.
+2021-03-27T22:22:21.617972000 0.043421s notice: Running rethinkdb 2.4.0 (CLANG 11.0.3 (clang-1103.0.32.62))...
+2021-03-27T22:22:21.640057000 0.065502s notice: Running on Darwin 20.3.0 x86_64
+2021-03-27T22:22:21.640181000 0.065626s notice: Loading data from directory /Users/VykesMac/repos/chatapp/rethinkdb_data
+2021-03-27T22:22:21.694477000 0.119921s info: Automatically using cache size of 753 MB
+2021-03-27T22:22:21.699185000 0.124629s notice: Listening for intracluster connections on port 29015
+2021-03-27T22:22:21.701016000 0.126459s notice: Listening for client driver connections on port 28015
+2021-03-27T22:22:21.701144000 0.126587s notice: Listening for administrative HTTP connections on port 8080
+2021-03-27T22:22:21.701150000 0.126593s notice: Listening on cluster addresses: 127.0.0.1, ::1
+2021-03-27T22:22:21.701154000 0.126597s notice: Listening on driver addresses: 127.0.0.1, ::1
+2021-03-27T22:22:21.701158000 0.126601s notice: Listening on http addresses: 127.0.0.1, ::1
+2021-03-27T22:22:21.701162000 0.126605s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2021-03-27T22:22:21.701166000 0.126609s notice: Server ready, "my_mac_local_pll" 82a4c6b2-184c-4cb0-bf88-ef42915563f0
+2021-03-27T22:22:39.450537000 17.875736s info: Table 19b83063-b37d-405a-9bce-a84d3bca6957: Starting a new Raft election for term 1.
+2021-03-27T22:22:39.451171000 17.876370s info: Table 19b83063-b37d-405a-9bce-a84d3bca6957: Added replica on this server.
+2021-03-27T22:22:39.472963000 17.898161s info: Table 19b83063-b37d-405a-9bce-a84d3bca6957: This server is Raft leader for term 1. Latest log index is 0.
+2021-03-27T22:22:40.525488000 18.950671s info: Table 0758fc74-2354-4488-817b-0d86c2c104ab: Starting a new Raft election for term 1.
+2021-03-27T22:22:40.525940000 18.951124s info: Table 0758fc74-2354-4488-817b-0d86c2c104ab: Added replica on this server.
+2021-03-27T22:22:40.549365000 18.974548s info: Table 0758fc74-2354-4488-817b-0d86c2c104ab: This server is Raft leader for term 1. Latest log index is 0.
+2021-03-27T22:22:41.641831000 20.066999s info: Table 132ba741-7da7-4cbd-ad4d-d858a91328c9: Starting a new Raft election for term 1.
+2021-03-27T22:22:41.642324000 20.067492s info: Table 132ba741-7da7-4cbd-ad4d-d858a91328c9: Added replica on this server.
+2021-03-27T22:22:41.667084000 20.092252s info: Table 132ba741-7da7-4cbd-ad4d-d858a91328c9: This server is Raft leader for term 1. Latest log index is 0.
+2021-03-27T22:22:42.725476000 21.150628s info: Table 084e0fb8-1ca9-4a6c-9745-9d868ef693c5: Starting a new Raft election for term 1.
+2021-03-27T22:22:42.728718000 21.153871s info: Table 084e0fb8-1ca9-4a6c-9745-9d868ef693c5: Added replica on this server.
+2021-03-27T22:22:42.769096000 21.194249s info: Table 084e0fb8-1ca9-4a6c-9745-9d868ef693c5: This server is Raft leader for term 1. Latest log index is 0.
+2021-03-27T22:23:07.998879000 46.423683s notice: Server got SIGINT from pid 371, uid 501; shutting down...
+2021-03-27T22:23:07.999149000 46.423953s notice: Shutting down client connections...
+2021-03-27T22:23:08.001868000 46.426672s notice: All client connections closed.
+2021-03-27T22:23:08.001883000 46.426686s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2021-03-27T22:23:08.015202000 46.440005s notice: Storage engine shut down.
