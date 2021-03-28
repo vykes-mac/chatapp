@@ -1,4 +1,4 @@
-enum Receipt { sent, deliverred, read }
+import 'package:flutter/foundation.dart';
 
 class Message {
   final String from;
@@ -6,14 +6,20 @@ class Message {
   final String id;
   final DateTime date;
   final String contents;
-  Receipt receipt;
 
-  Message(
-    this.id,
-    this.from,
-    this.to,
-    this.date,
-    this.contents, {
-    Receipt receipt,
-  }) : this.receipt = receipt;
+  Message({
+    @required this.id,
+    @required this.from,
+    @required this.to,
+    @required this.date,
+    @required this.contents,
+  });
+
+  toJson() => {
+        'id': this.id,
+        'from': this.from,
+        'to': this.to,
+        'date': DateTime.now(),
+        'contents': this.contents,
+      };
 }

@@ -8,6 +8,7 @@
 .buildlog/
 .history
 .svn/
+rethinkdb_data/*
 
 # IntelliJ related
 *.iml

@@ -14,4 +14,6 @@ class Session {
     this.active = active;
     this.lastSeen = lastSeen;
   }
+
+  toJson() => {'id': id, 'active': active, 'last_seen': lastSeen};
 }

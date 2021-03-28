@@ -1,5 +1,5 @@
 import 'package:chat/src/models/session.dart';
-import 'package:chat/src/services/session_service_impl.dart';
+import 'package:chat/src/services/session/session_service_impl.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:rethinkdb_dart/rethinkdb_dart.dart';
 
@@ -17,8 +17,11 @@ void main() {
   });
 
   tearDown(() async {
-    await dropDb(r, connection);
-    connection.close();
+    await cleanDb(r, connection);
+  });
+
+  tearDownAll(() {
+    r.dbDrop('test').run(connection).then((value) => print(value));
   });
 
   final session = Session(

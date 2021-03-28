@@ -58,7 +58,7 @@ packages:
     source: hosted
     version: "2.1.5"
   fake_async:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: fake_async
       url: "https://pub.dartlang.org"
