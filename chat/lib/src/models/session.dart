@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
 
 class Session {
-  String id;
+  String get id => _id;
+  String _id;
   bool active;
   DateTime lastSeen;
 
   Session({
-    @required String id,
     @required bool active,
     @required DateTime lastSeen,
   }) {
-    this.id = id;
     this.active = active;
     this.lastSeen = lastSeen;
   }
 
-  toJson() => {'id': id, 'active': active, 'last_seen': lastSeen};
+  toJson() => {'active': active, 'last_seen': lastSeen};
+
+  factory Session.fromJson(Map<String, dynamic> json) {
+    final session =
+        Session(active: json['active'], lastSeen: json['last_seen']);
+    session._id = json['id'];
+    return session;
+  }
 }

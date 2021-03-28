@@ -1,6 +1,4 @@
 import 'package:chat/src/models/session.dart';
-import 'package:chat/src/services/session/session_service_contract.dart';
-import 'package:chat/src/services/session/session_service_impl.dart';
 import 'package:chat/src/services/typing/typing_notification.dart';
 import 'package:chat/src/services/typing/typing_notification_service_contract.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -12,13 +10,11 @@ void main() {
   Rethinkdb r = Rethinkdb();
   Connection connection;
   TypingNotification sut;
-  ISessionService sessionService;
 
   setUp(() async {
     connection = await r.connect(host: "127.0.0.1", port: 28015);
     await createDb(r, connection);
     sut = TypingNotification(r, connection);
-    sessionService = SessionService(r, connection);
   });
 
   tearDown(() async {
@@ -26,20 +22,19 @@ void main() {
     await cleanDb(r, connection);
   });
 
-  final session = Session(
-    id: '1234',
-    active: true,
-    lastSeen: DateTime.now(),
-  );
+  final session = Session.fromJson({
+    'id': '1234',
+    'active': true,
+    'lastSeen': DateTime.now(),
+  });
 
-  final session2 = Session(
-    id: '1111',
-    active: true,
-    lastSeen: DateTime.now(),
-  );
+  final session2 = Session.fromJson({
+    'id': '1111',
+    'active': true,
+    'lastSeen': DateTime.now(),
+  });
 
   test('sent typing notifcation successfully', () async {
-    await sessionService.connect(session);
     TypingEvent typingEvent =
         TypingEvent(from: session2.id, to: session.id, event: Typing.start);
 
@@ -51,9 +46,6 @@ void main() {
     sut.subscribe(session2, [session.id]).listen(expectAsync1((event) {
       expect(event.from, session.id);
     }, count: 2));
-
-    await sessionService.connect(session);
-    await sessionService.connect(session2);
 
     TypingEvent typing = TypingEvent(
       to: session2.id,

@@ -9,20 +9,19 @@ class SessionService implements ISessionService {
   SessionService(this.r, this._connection);
 
   @override
-  Future<bool> connect(Session session) async {
-    var isConnected = false;
-    await r
-        .table('sessions')
-        .insert({
-          'id': session.id,
-          'active': session.active,
-          'last_seen': session.lastSeen,
-        }, {
-          'conflict': 'update'
-        })
-        .run(_connection)
-        .then((_) => isConnected = true);
-    return isConnected;
+  Future<Session> connect({String sessionId}) async {
+    var data = {
+      'active': true,
+      'last_seen': DateTime.now(),
+    };
+    if (sessionId != null) data['id'] = sessionId;
+
+    final result = await r.table('sessions').insert(data, {
+      'conflict': 'update',
+      'return_changes': true,
+    }).run(_connection);
+
+    return Session.fromJson(result['changes'].first['new_val']);
   }
 
   @override
@@ -43,10 +42,7 @@ class SessionService implements ISessionService {
     final sessionsList = await sessions.toList();
     return sessionsList
         .map(
-          (item) => Session(
-              id: item['id'],
-              active: item['active'],
-              lastSeen: item['last_seen']),
+          (item) => Session.fromJson(item),
         )
         .toList();
   }

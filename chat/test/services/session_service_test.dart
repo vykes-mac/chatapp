@@ -1,4 +1,3 @@
-import 'package:chat/src/models/session.dart';
 import 'package:chat/src/services/session/session_service_impl.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:rethinkdb_dart/rethinkdb_dart.dart';
@@ -24,19 +23,14 @@ void main() {
     r.dbDrop('test').run(connection).then((value) => print(value));
   });
 
-  final session = Session(
-    id: '1234',
-    active: true,
-    lastSeen: DateTime.now(),
-  );
   test('creates a new session document in database', () async {
-    final res = await sut.connect(session);
-    expect(res, true);
+    final session = await sut.connect();
+    expect(session.id, isNotEmpty);
   });
 
   test('get online sessions', () async {
     //arrange
-    await sut.connect(session);
+    await sut.connect();
     //act
     final sessions = await sut.online();
     //assert
