@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:chat/src/models/receipt.dart';
-import 'package:chat/src/models/session.dart';
+import 'package:chat/src/models/user.dart';
 import 'package:chat/src/services/receipt/receipt_service_contract.dart';
 import 'package:rethinkdb_dart/rethinkdb_dart.dart';
 
@@ -15,8 +15,8 @@ class ReceiptService implements IReceiptService {
   ReceiptService(this._r, this._connection);
 
   @override
-  Stream<Receipt> receipts(Session session) {
-    _startReceivingReceipts(session);
+  Stream<Receipt> receipts(User user) {
+    _startReceivingReceipts(user);
     return _controller.stream;
   }
 
@@ -33,10 +33,10 @@ class ReceiptService implements IReceiptService {
     _controller?.close();
   }
 
-  _startReceivingReceipts(Session session) {
+  _startReceivingReceipts(User user) {
     _changefeed = _r
         .table('receipts')
-        .filter({'recipient': session.id})
+        .filter({'recipient': user.id})
         .changes({'include_initial': true})
         .run(_connection)
         .asStream()

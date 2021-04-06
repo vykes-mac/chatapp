@@ -1,4 +1,4 @@
-import 'package:chat/src/models/session.dart';
+import 'package:chat/src/models/user.dart';
 import 'package:chat/src/services/typing/typing_notification.dart';
 import 'package:chat/src/services/typing/typing_notification_service_contract.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -22,13 +22,13 @@ void main() {
     await cleanDb(r, connection);
   });
 
-  final session = Session.fromJson({
+  final user = User.fromJson({
     'id': '1234',
     'active': true,
     'lastSeen': DateTime.now(),
   });
 
-  final session2 = Session.fromJson({
+  final user2 = User.fromJson({
     'id': '1111',
     'active': true,
     'lastSeen': DateTime.now(),
@@ -36,30 +36,30 @@ void main() {
 
   test('sent typing notifcation successfully', () async {
     TypingEvent typingEvent =
-        TypingEvent(from: session2.id, to: session.id, event: Typing.start);
+        TypingEvent(from: user2.id, to: user.id, event: Typing.start);
 
-    final res = await sut.send(event: typingEvent, to: session);
+    final res = await sut.send(event: typingEvent, to: user);
     expect(res, true);
   });
 
   test('successfully subscribe and receive typing events', () async {
-    sut.subscribe(session2, [session.id]).listen(expectAsync1((event) {
-      expect(event.from, session.id);
+    sut.subscribe(user2, [user.id]).listen(expectAsync1((event) {
+      expect(event.from, user.id);
     }, count: 2));
 
     TypingEvent typing = TypingEvent(
-      to: session2.id,
-      from: session.id,
+      to: user2.id,
+      from: user.id,
       event: Typing.start,
     );
 
     TypingEvent stopTyping = TypingEvent(
-      to: session2.id,
-      from: session.id,
+      to: user2.id,
+      from: user.id,
       event: Typing.stop,
     );
 
-    await sut.send(event: typing, to: session2);
-    await sut.send(event: stopTyping, to: session2);
+    await sut.send(event: typing, to: user2);
+    await sut.send(event: stopTyping, to: user2);
   });
 }

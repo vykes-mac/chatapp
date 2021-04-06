@@ -1,5 +1,5 @@
 import 'package:chat/src/models/receipt.dart';
-import 'package:chat/src/models/session.dart';
+import 'package:chat/src/models/user.dart';
 import 'package:chat/src/services/receipt/receipt_service_impl.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:rethinkdb_dart/rethinkdb_dart.dart';
@@ -22,7 +22,7 @@ void main() {
     await cleanDb(r, connection);
   });
 
-  final session = Session.fromJson({
+  final user = User.fromJson({
     'id': '1234',
     'active': true,
     'lastSeen': DateTime.now(),
@@ -40,18 +40,18 @@ void main() {
   });
 
   test('successfully subscribe and receive receipts', () async {
-    sut.receipts(session).listen(expectAsync1((receipt) {
-          expect(receipt.recipient, session.id);
+    sut.receipts(user).listen(expectAsync1((receipt) {
+          expect(receipt.recipient, user.id);
         }, count: 2));
 
     Receipt receipt = Receipt(
-        recipient: session.id,
+        recipient: user.id,
         messageId: '1234',
         status: ReceiptStatus.deliverred,
         timestamp: DateTime.now());
 
     Receipt anotherReceipt = Receipt(
-        recipient: session.id,
+        recipient: user.id,
         messageId: '1234',
         status: ReceiptStatus.read,
         timestamp: DateTime.now());

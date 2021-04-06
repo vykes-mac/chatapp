@@ -1,7 +1,7 @@
-import 'package:chat/src/models/session.dart';
+import 'package:chat/src/models/user.dart';
 
-abstract class ISessionService {
-  Future<Session> connect({String sessionId});
-  Future<List<Session>> online();
-  Future<void> disconnect(Session session);
+abstract class IUserService {
+  Future<User> connect(User user);
+  Future<List<User>> online();
+  Future<void> disconnect(User user);
 }

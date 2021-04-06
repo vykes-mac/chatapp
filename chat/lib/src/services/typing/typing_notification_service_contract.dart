@@ -1,4 +1,4 @@
-import 'package:chat/src/models/session.dart';
+import 'package:chat/src/models/user.dart';
 import 'package:flutter/foundation.dart';
 
 enum Typing { start, stop }
@@ -44,6 +44,6 @@ class TypingEvent {
 
 abstract class ITypingNotification {
   Future<bool> send({@required TypingEvent event});
-  Stream<TypingEvent> subscribe(Session session, List<String> sessionIds);
+  Stream<TypingEvent> subscribe(User user, List<String> userIds);
   dispose();
 }

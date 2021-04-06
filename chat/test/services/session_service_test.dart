@@ -1,3 +1,4 @@
+import 'package:chat/src/models/user.dart';
 import 'package:chat/src/services/session/session_service_impl.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:rethinkdb_dart/rethinkdb_dart.dart';
@@ -7,12 +8,12 @@ import '../services/helpers.dart';
 void main() {
   Rethinkdb r = Rethinkdb();
   Connection connection;
-  SessionService sut;
+  UserService sut;
 
   setUp(() async {
     connection = await r.connect(host: "127.0.0.1", port: 28015);
     await createDb(r, connection);
-    sut = SessionService(r, connection);
+    sut = UserService(r, connection);
   });
 
   tearDown(() async {
@@ -23,17 +24,29 @@ void main() {
     r.dbDrop('test').run(connection).then((value) => print(value));
   });
 
-  test('creates a new session document in database', () async {
-    final session = await sut.connect();
-    expect(session.id, isNotEmpty);
+  test('creates a new user document in database', () async {
+    final user = User(
+      username: 'test',
+      photoUrl: 'url',
+      active: true,
+      lastSeen: DateTime.now(),
+    );
+    final userWithId = await sut.connect(user);
+    expect(userWithId.id, isNotEmpty);
   });
 
-  test('get online sessions', () async {
+  test('get online users', () async {
+    final user = User(
+      username: 'test',
+      photoUrl: 'url',
+      active: true,
+      lastSeen: DateTime.now(),
+    );
     //arrange
-    await sut.connect();
+    await sut.connect(user);
     //act
-    final sessions = await sut.online();
+    final users = await sut.online();
     //assert
-    expect(sessions.length, 1);
+    expect(users.length, 1);
   });
 }

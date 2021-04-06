@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:chat/src/models/message.dart';
-import 'package:chat/src/models/session.dart';
+import 'package:chat/src/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:rethinkdb_dart/rethinkdb_dart.dart';
 
@@ -24,8 +24,8 @@ class MessageService implements IMessageService {
   }
 
   @override
-  Stream<Message> messages({@required Session activeSession}) {
-    _startReceivingMessages(activeSession);
+  Stream<Message> messages({@required User activeUser}) {
+    _startReceivingMessages(activeUser);
     return _controller.stream;
   }
 
@@ -35,10 +35,10 @@ class MessageService implements IMessageService {
     _controller?.close();
   }
 
-  _startReceivingMessages(Session session) {
+  _startReceivingMessages(User user) {
     _changefeed = r
         .table('messages')
-        .filter({'to': session.id})
+        .filter({'to': user.id})
         .changes({'include_initial': true})
         .run(_connection)
         .asStream()

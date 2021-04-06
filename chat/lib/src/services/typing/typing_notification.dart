@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:chat/src/models/session.dart';
+import 'package:chat/src/models/user.dart';
 import 'package:chat/src/services/typing/typing_notification_service_contract.dart';
 import 'package:flutter/foundation.dart';
 import 'package:rethinkdb_dart/rethinkdb_dart.dart';
@@ -15,13 +15,13 @@ class TypingNotification implements ITypingNotification {
   TypingNotification(this._r, this._connection);
 
   @override
-  Stream<TypingEvent> subscribe(Session session, List<String> sessionIds) {
-    _startReceivingTypingEvents(session, sessionIds);
+  Stream<TypingEvent> subscribe(User user, List<String> userIds) {
+    _startReceivingTypingEvents(user, userIds);
     return _controller.stream;
   }
 
   @override
-  Future<bool> send({@required TypingEvent event, @required Session to}) async {
+  Future<bool> send({@required TypingEvent event, @required User to}) async {
     if (!to.active) return false;
     Map record = await _r
         .table('typing_events')
@@ -35,13 +35,13 @@ class TypingNotification implements ITypingNotification {
     _controller?.close();
   }
 
-  _startReceivingTypingEvents(Session session, List<String> sessionIds) {
+  _startReceivingTypingEvents(User user, List<String> userIds) {
     _changefeed = _r
         .table('typing_events')
         .filter((event) {
           return event('to')
-              .eq(session.id)
-              .and(_r.expr(sessionIds).contains(event('from')));
+              .eq(user.id)
+              .and(_r.expr(userIds).contains(event('from')));
         })
         .changes({'include_initial': true})
         .run(_connection)

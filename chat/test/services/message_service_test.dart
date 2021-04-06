@@ -1,5 +1,5 @@
 import 'package:chat/src/models/message.dart';
-import 'package:chat/src/models/session.dart';
+import 'package:chat/src/models/user.dart';
 import 'package:chat/src/services/message/message_service_impl.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:rethinkdb_dart/rethinkdb_dart.dart';
@@ -22,20 +22,20 @@ void main() {
     await cleanDb(r, connection);
   });
 
-  final session = Session.fromJson({
+  final user = User.fromJson({
     'id': '1234',
     'active': true,
     'lastSeen': DateTime.now(),
   });
 
-  final session2 = Session.fromJson({
+  final user2 = User.fromJson({
     'id': '1111',
     'active': true,
     'lastSeen': DateTime.now(),
   });
   test('sent message successfully', () async {
     Message message = Message(
-      from: session.id,
+      from: user.id,
       to: '3456',
       timestamp: DateTime.now(),
       contents: 'this is a message',
@@ -46,21 +46,21 @@ void main() {
   });
 
   test('successfully subscribe and receive messages', () async {
-    sut.messages(activeSession: session2).listen(expectAsync1((message) {
-          expect(message.to, session2.id);
+    sut.messages(activeUser: user2).listen(expectAsync1((message) {
+          expect(message.to, user2.id);
           expect(message.id, isNotEmpty);
         }, count: 2));
 
     Message message = Message(
-      from: session.id,
-      to: session2.id,
+      from: user.id,
+      to: user2.id,
       timestamp: DateTime.now(),
       contents: 'this is a message',
     );
 
     Message secondMessage = Message(
-      from: session.id,
-      to: session2.id,
+      from: user.id,
+      to: user2.id,
       timestamp: DateTime.now(),
       contents: 'this is another message',
     );
@@ -71,24 +71,24 @@ void main() {
 
   test('successfully subscribe and receive new messages ', () async {
     Message message = Message(
-      from: session.id,
-      to: session2.id,
+      from: user.id,
+      to: user2.id,
       timestamp: DateTime.now(),
       contents: 'this is a message',
     );
 
     Message secondMessage = Message(
-      from: session.id,
-      to: session2.id,
+      from: user.id,
+      to: user2.id,
       timestamp: DateTime.now(),
       contents: 'this is another message',
     );
 
     await sut.send(message);
     await sut.send(secondMessage).whenComplete(
-          () => sut.messages(activeSession: session2).listen(
+          () => sut.messages(activeUser: user2).listen(
                 expectAsync1((message) {
-                  expect(message.to, session2.id);
+                  expect(message.to, user2.id);
                 }, count: 2),
               ),
         );
