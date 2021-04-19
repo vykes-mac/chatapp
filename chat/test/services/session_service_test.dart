@@ -1,5 +1,5 @@
 import 'package:chat/src/models/user.dart';
-import 'package:chat/src/services/session/session_service_impl.dart';
+import 'package:chat/src/services/session/user_service_impl.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:rethinkdb_dart/rethinkdb_dart.dart';
 

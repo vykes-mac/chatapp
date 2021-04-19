@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:chat/src/models/message.dart';
 import 'package:chat/src/models/user.dart';
+import 'package:chat/src/services/encryption/encryption_contract.dart';
 import 'package:flutter/material.dart';
 import 'package:rethinkdb_dart/rethinkdb_dart.dart';
 
@@ -13,13 +14,17 @@ class MessageService implements IMessageService {
 
   final _controller = StreamController<Message>.broadcast();
   StreamSubscription _changefeed;
+  final IEncryption _encryption;
 
-  MessageService(this.r, this._connection);
+  MessageService(this.r, this._connection, {IEncryption encryption})
+      : _encryption = encryption;
 
   @override
   Future<bool> send(Message message) async {
-    Map record =
-        await r.table('messages').insert(message.toJson()).run(_connection);
+    var data = message.toJson();
+    if (_encryption != null)
+      data['contents'] = _encryption.encrypt(message.contents);
+    Map record = await r.table('messages').insert(data).run(_connection);
     return record['inserted'] == 1;
   }
 
@@ -65,7 +70,10 @@ class MessageService implements IMessageService {
   }
 
   Message _messageFromFeed(feedData) {
-    return Message.fromJson(feedData['new_val']);
+    var data = feedData['new_val'];
+    if (_encryption != null)
+      data['contents'] = _encryption.decrypt(data['contents']);
+    return Message.fromJson(data);
   }
 
   _removeDeliverredMessage(Message message) {
