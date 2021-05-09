@@ -18,7 +18,7 @@ class Message {
   toJson() => {
         'from': this.from,
         'to': this.to,
-        'date': DateTime.now(),
+        'timestamp': this.timestamp,
         'contents': this.contents,
       };
   factory Message.fromJson(Map<String, dynamic> json) {
