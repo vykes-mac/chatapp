@@ -14,6 +14,9 @@ class Subscribed extends MessageEvent {}
 class MessageSent extends MessageEvent {
   final Message message;
   const MessageSent(this.message);
+
+  @override
+  List<Object> get props => [message];
 }
 
 class _MessageReceived extends MessageEvent {

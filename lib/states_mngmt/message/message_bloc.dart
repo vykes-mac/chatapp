@@ -27,7 +27,7 @@ class MessageBloc extends Bloc<MessageEvent, MessageState> {
     }
     if (event is MessageSent) {
       await _messageService.send(event.message);
-      yield MessageState.sent();
+      yield MessageState.sent(event.message);
     }
   }
 
