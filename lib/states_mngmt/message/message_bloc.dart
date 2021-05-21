@@ -8,10 +8,9 @@ part 'message_event.dart';
 part 'message_state.dart';
 
 class MessageBloc extends Bloc<MessageEvent, MessageState> {
-  MessageBloc(this._messageService, this._user) : super(MessageState.initial());
+  MessageBloc(this._messageService) : super(MessageState.initial());
 
   final IMessageService _messageService;
-  final User _user;
   StreamSubscription _subscription;
 
   @override
@@ -19,7 +18,7 @@ class MessageBloc extends Bloc<MessageEvent, MessageState> {
     if (event is Subscribed) {
       await _subscription?.cancel();
       _subscription = _messageService
-          .messages(activeUser: _user)
+          .messages(activeUser: event.user)
           .listen((message) => add(_MessageReceived(message)));
     }
     if (event is _MessageReceived) {

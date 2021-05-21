@@ -18,7 +18,7 @@ void main() {
       active: true,
       lastSeen: DateTime.now(),
     );
-    sut = ReceiptBloc(receiptService, user);
+    sut = ReceiptBloc(receiptService);
   });
 
   tearDown(() => sut.close());
@@ -51,7 +51,7 @@ void main() {
     when(receiptService.receipts(any))
         .thenAnswer((_) => Stream.fromIterable([receipt]));
 
-    sut.add(ReceiptEvent.onSubscribed());
+    sut.add(ReceiptEvent.onSubscribed(user));
     expectLater(sut.stream, emitsInOrder([ReceiptReceivedSuccess(receipt)]));
   });
 }

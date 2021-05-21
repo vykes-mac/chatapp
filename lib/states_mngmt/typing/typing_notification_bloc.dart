@@ -13,8 +13,6 @@ class TypingNotificationBloc
       : super(TypingNotificationState.initial());
 
   final ITypingNotification _typingNotification;
-  User _user;
-  List<String> _usersWithChat;
   StreamSubscription _subscription;
 
   @override
@@ -25,11 +23,9 @@ class TypingNotificationBloc
         add(NotSubscribed());
         return;
       }
-      _user = typingEvent._user;
-      _usersWithChat = typingEvent.usersWithChat;
       await _subscription?.cancel();
       _subscription = _typingNotification
-          .subscribe(_user, _usersWithChat)
+          .subscribe(typingEvent.user, typingEvent.usersWithChat)
           .listen(
               (typingEvent) => add(_TypingNotificationReceived(typingEvent)));
     }

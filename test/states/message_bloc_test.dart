@@ -18,7 +18,7 @@ void main() {
       active: true,
       lastSeen: DateTime.now(),
     );
-    sut = MessageBloc(messageService, user);
+    sut = MessageBloc(messageService);
   });
 
   tearDown(() => sut.close());
@@ -51,7 +51,7 @@ void main() {
     when(messageService.messages(activeUser: anyNamed('activeUser')))
         .thenAnswer((_) => Stream.fromIterable([message]));
 
-    sut.add(MessageEvent.onSubscribed());
+    sut.add(MessageEvent.onSubscribed(user));
     expectLater(sut.stream, emitsInOrder([MessageReceivedSuccess(message)]));
   });
 }

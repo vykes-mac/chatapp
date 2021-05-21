@@ -13,12 +13,12 @@ abstract class TypingNotificationEvent extends Equatable {
 }
 
 class Subscribed extends TypingNotificationEvent {
-  final User _user;
+  final User user;
   final List<String> usersWithChat;
-  const Subscribed(this._user, {this.usersWithChat});
+  const Subscribed(this.user, {this.usersWithChat});
 
   @override
-  List<Object> get props => [_user, usersWithChat];
+  List<Object> get props => [user, usersWithChat];
 }
 
 class NotSubscribed extends TypingNotificationEvent {}

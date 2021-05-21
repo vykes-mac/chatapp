@@ -8,10 +8,9 @@ part 'receipt_event.dart';
 part 'receipt_state.dart';
 
 class ReceiptBloc extends Bloc<ReceiptEvent, ReceiptState> {
-  ReceiptBloc(this._receiptService, this._user) : super(ReceiptState.initial());
+  ReceiptBloc(this._receiptService) : super(ReceiptState.initial());
 
   final IReceiptService _receiptService;
-  final User _user;
   StreamSubscription _subscription;
 
   @override
@@ -19,7 +18,7 @@ class ReceiptBloc extends Bloc<ReceiptEvent, ReceiptState> {
     if (event is Subscribed) {
       await _subscription?.cancel();
       _subscription = _receiptService
-          .receipts(_user)
+          .receipts(event.user)
           .listen((receipt) => add(_ReceiptReceived(receipt)));
     }
     if (event is _ReceiptReceived) {

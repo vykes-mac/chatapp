@@ -2,14 +2,20 @@ part of 'message_bloc.dart';
 
 abstract class MessageEvent extends Equatable {
   const MessageEvent();
-  factory MessageEvent.onSubscribed() => Subscribed();
+  factory MessageEvent.onSubscribed(User user) => Subscribed(user);
   factory MessageEvent.onMessageSent(Message message) => MessageSent(message);
 
   @override
   List<Object> get props => [];
 }
 
-class Subscribed extends MessageEvent {}
+class Subscribed extends MessageEvent {
+  final User user;
+  const Subscribed(this.user);
+
+  @override
+  List<Object> get props => [user];
+}
 
 class MessageSent extends MessageEvent {
   final Message message;
