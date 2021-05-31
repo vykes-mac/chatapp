@@ -7,9 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfileUpload extends StatelessWidget {
-  final ProfileImageCubit profileImageCubit;
+  //final ProfileImageCubit profileImageCubit;
 
-  ProfileUpload(this.profileImageCubit);
+  ProfileUpload();
 
   @override
   Widget build(BuildContext context) {
@@ -22,31 +22,31 @@ class ProfileUpload extends StatelessWidget {
         child: InkWell(
           borderRadius: BorderRadius.circular(126.0),
           onTap: () async {
-            await profileImageCubit.getImage();
+            await context.read<ProfileImageCubit>().getImage();
           },
           child: Stack(
             fit: StackFit.expand,
             children: [
               CircleAvatar(
-                  backgroundColor: Colors.transparent,
-                  child: BlocBuilder<ProfileImageCubit, File>(
-                    bloc: profileImageCubit,
-                    builder: (context, state) {
-                      return state == null
-                          ? Icon(
-                              Icons.person_outline_rounded,
-                              size: 126,
-                              color: isLightTheme(context)
-                                  ? kIconLight
-                                  : Colors.black,
-                            )
-                          : ClipRRect(
-                              borderRadius: BorderRadius.circular(126.0),
-                              child: Image.file(state,
-                                  width: 126, height: 126, fit: BoxFit.fill),
-                            );
-                    },
-                  )),
+                backgroundColor: Colors.transparent,
+                child: BlocBuilder<ProfileImageCubit, File>(
+                  builder: (context, state) {
+                    return state == null
+                        ? Icon(
+                            Icons.person_outline_rounded,
+                            size: 126,
+                            color: isLightTheme(context)
+                                ? kIconLight
+                                : Colors.black,
+                          )
+                        : ClipRRect(
+                            borderRadius: BorderRadius.circular(126.0),
+                            child: Image.file(state,
+                                width: 126, height: 126, fit: BoxFit.fill),
+                          );
+                  },
+                ),
+              ),
               Align(
                 alignment: Alignment.bottomRight,
                 child: Icon(
