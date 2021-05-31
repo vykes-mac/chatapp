@@ -9,10 +9,10 @@ class User {
   DateTime lastSeen;
 
   User({
-    @required String username,
-    @required String photoUrl,
-    @required bool active,
-    @required DateTime lastSeen,
+    @required this.username,
+    @required this.photoUrl,
+    @required this.active,
+    @required this.lastSeen,
   }) {
     this.active = active;
     this.lastSeen = lastSeen;
