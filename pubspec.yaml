@@ -33,6 +33,7 @@ dependencies:
   http: ^0.12.2
   image_picker: ^0.6.7+22
   rethinkdb_dart: ^2.3.2+6
+  shared_preferences: ^2.0.6
   sqflite: ^2.0.0+3
 
 dev_dependencies:

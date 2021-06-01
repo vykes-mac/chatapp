@@ -50,6 +50,18 @@ class _OnboardingState extends State<Onboarding> {
                 padding: EdgeInsets.only(left: 20.0, right: 20.0),
                 child: ElevatedButton(
                   onPressed: () async {
+                    final error = _checkInputs();
+                    if (error.isNotEmpty) {
+                      final snackBar = SnackBar(
+                        content: Text(
+                          error,
+                          style: TextStyle(
+                              fontSize: 14.0, fontWeight: FontWeight.bold),
+                        ),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      return;
+                    }
                     await _connectSession();
                   },
                   child: Container(
@@ -108,5 +120,13 @@ class _OnboardingState extends State<Onboarding> {
   _connectSession() async {
     final profileImage = context.read<ProfileImageCubit>().state;
     await context.read<OnboardingCubit>().connect(_username, profileImage);
+  }
+
+  String _checkInputs() {
+    var error = '';
+    if (_username.isEmpty) error = 'Enter display name';
+    if (context.read<ProfileImageCubit>().state == null)
+      error = error + '\n' + 'Upload profile image';
+    return error;
   }
 }
