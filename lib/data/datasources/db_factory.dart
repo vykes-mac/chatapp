@@ -33,10 +33,11 @@ class LocalDatabaseFactory {
           CREATE TABLE messages(
             chat_id TEXT NOT NULL,
             id TEXT PRIMARY KEY,
-            from TEXT NOT NULL,
-            to TEXT NOT NULL,
+            sender TEXT NOT NULL,
+            receiver TEXT NOT NULL,
             contents TEXT NOT NULL,
-            receipt TEXT NOT NULL
+            receipt TEXT NOT NULL,
+            received_at TIMESTAMP NOT NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
             )
       """)

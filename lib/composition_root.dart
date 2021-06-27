@@ -1,13 +1,17 @@
 import 'package:chat/chat.dart';
 import 'package:chatapp/cache/local_cache.dart';
 import 'package:chatapp/data/datasources/datasource_contract.dart';
+import 'package:chatapp/data/datasources/db_factory.dart';
+import 'package:chatapp/data/datasources/sqflite_datasource.dart';
 import 'package:chatapp/data/services/image_uploader.dart';
+import 'package:chatapp/states_mngmt/home/chats_cubit.dart';
 import 'package:chatapp/states_mngmt/home/home_cubit.dart';
 import 'package:chatapp/states_mngmt/message/message_bloc.dart';
 import 'package:chatapp/states_mngmt/onboarding/onboarding_cubit.dart';
 import 'package:chatapp/states_mngmt/onboarding/profile_image_cubit.dart';
 import 'package:chatapp/ui/pages/home/home.dart';
 import 'package:chatapp/ui/pages/onboarding/onboarding.dart';
+import 'package:chatapp/viewmodels/chats_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rethinkdb_dart/rethinkdb_dart.dart';
@@ -31,8 +35,10 @@ class CompositionRoot {
     _userService = UserService(_r, _connection);
     _localCache = LocalCache(_sharedPreferences);
     _messageService = MessageService(_r, _connection);
-    //_db = await LocalDatabaseFactory().createDatabase();
-    //_datasource = SqfliteDatasource(_db);
+    _db = await LocalDatabaseFactory().createDatabase();
+    // _db.delete('chats');
+    // _db.delete('messages');
+    _datasource = SqfliteDatasource(_db);
   }
 
   static Widget start() {
@@ -61,11 +67,13 @@ class CompositionRoot {
   static Widget composeHomeUi() {
     HomeCubit homeCubit = HomeCubit(_userService, _localCache);
     MessageBloc messageBloc = MessageBloc(_messageService);
-    //ChatsViewModel viewModel = ChatsViewModel(_datasource);
+    ChatsViewModel viewModel = ChatsViewModel(_datasource, _userService);
+    ChatsCubit chatsCubit = ChatsCubit(viewModel);
 
     return MultiBlocProvider(providers: [
       BlocProvider(create: (BuildContext context) => homeCubit),
-      BlocProvider(create: (BuildContext context) => messageBloc)
-    ], child: Home(null));
+      BlocProvider(create: (BuildContext context) => messageBloc),
+      BlocProvider(create: (BuildContext context) => chatsCubit)
+    ], child: Home(viewModel));
   }
 }

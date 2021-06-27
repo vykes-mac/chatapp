@@ -1,5 +1,7 @@
+import 'package:chatapp/states_mngmt/home/chats_cubit.dart';
 import 'package:chatapp/states_mngmt/home/home_cubit.dart';
 import 'package:chatapp/states_mngmt/home/home_state.dart';
+import 'package:chatapp/states_mngmt/message/message_bloc.dart';
 import 'package:chatapp/ui/widgets/home/active/active_user.dart';
 import 'package:chatapp/ui/widgets/home/chats/chats.dart';
 import 'package:chatapp/ui/widgets/home/profile_image.dart';
@@ -111,9 +113,11 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
   }
 
   _connectSession() async {
+    context.read<ChatsCubit>().chats();
     final user = await context.read<HomeCubit>().connect();
 
     context.read<HomeCubit>().activeUsers(user);
+    context.read<MessageBloc>().add(MessageEvent.onSubscribed(user));
   }
 
   @override
