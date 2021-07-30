@@ -25,13 +25,14 @@ class MessageBloc extends Bloc<MessageEvent, MessageState> {
       yield MessageState.received(event.message);
     }
     if (event is MessageSent) {
-      await _messageService.send(event.message);
-      yield MessageState.sent(event.message);
+      final message = await _messageService.send(event.message);
+      yield MessageState.sent(message);
     }
   }
 
   @override
   Future<void> close() {
+    print('dispose called');
     _subscription?.cancel();
     _messageService.dispose();
     return super.close();

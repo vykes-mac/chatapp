@@ -1,3 +1,4 @@
+import 'package:chat/chat.dart';
 import 'package:chatapp/data/datasources/datasource_contract.dart';
 import 'package:chatapp/models/chat.dart';
 import 'package:chatapp/models/local_message.dart';
@@ -10,17 +11,21 @@ class SqfliteDatasource implements IDatasource {
 
   @override
   Future<void> addChat(Chat chat) async {
-    return await _db.insert(
-      'chats',
-      chat.toMap(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
+    return await _db.transaction((txn) async {
+      await txn.insert(
+        'chats',
+        chat.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.rollback,
+      );
+    });
   }
 
   @override
   Future<void> addMessage(LocalMessage message) async {
-    await _db.insert('messages', message.toMap(),
-        conflictAlgorithm: ConflictAlgorithm.replace);
+    await _db.transaction((txn) async {
+      await txn.insert('messages', message.toMap(),
+          conflictAlgorithm: ConflictAlgorithm.replace);
+    });
   }
 
   @override
@@ -112,5 +117,16 @@ class SqfliteDatasource implements IDatasource {
     batch.delete('messages', where: 'chat_id = ?', whereArgs: [chatId]);
     batch.delete('chats', where: 'id = ?', whereArgs: [chatId]);
     await batch.commit(noResult: true);
+  }
+
+  @override
+  Future<void> updateMessageReceipt(
+      String messageId, ReceiptStatus status) async {
+    return _db.transaction((txn) async {
+      await txn.update('messages', {'receipt': status.value()},
+          where: 'id = ?',
+          whereArgs: [messageId],
+          conflictAlgorithm: ConflictAlgorithm.replace);
+    });
   }
 }

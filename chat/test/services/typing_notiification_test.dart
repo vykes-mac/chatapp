@@ -1,3 +1,4 @@
+import 'package:chat/chat.dart';
 import 'package:chat/src/models/user.dart';
 import 'package:chat/src/services/typing/typing_notification.dart';
 import 'package:chat/src/services/typing/typing_notification_service_contract.dart';
@@ -5,6 +6,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:rethinkdb_dart/rethinkdb_dart.dart';
 
 import 'helpers.dart';
+
+//class MockUserService extends Mock implements IUserService {}
 
 void main() {
   Rethinkdb r = Rethinkdb();
@@ -14,7 +17,7 @@ void main() {
   setUp(() async {
     connection = await r.connect(host: "127.0.0.1", port: 28015);
     await createDb(r, connection);
-    sut = TypingNotification(r, connection);
+    sut = TypingNotification(r, connection, null);
   });
 
   tearDown(() async {
@@ -38,7 +41,7 @@ void main() {
     TypingEvent typingEvent =
         TypingEvent(from: user2.id, to: user.id, event: Typing.start);
 
-    final res = await sut.send(event: typingEvent, to: user);
+    final res = await sut.send(event: typingEvent);
     expect(res, true);
   });
 
@@ -59,7 +62,7 @@ void main() {
       event: Typing.stop,
     );
 
-    await sut.send(event: typing, to: user2);
-    await sut.send(event: stopTyping, to: user2);
+    await sut.send(event: typing);
+    await sut.send(event: stopTyping);
   });
 }

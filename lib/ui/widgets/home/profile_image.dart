@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chatapp/ui/widgets/home/online_indicator.dart';
 import 'package:flutter/material.dart';
 
@@ -19,8 +20,12 @@ class ProfileImage extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(126.0),
-            child: Image.network(imageUrl,
-                width: 126, height: 126, fit: BoxFit.fill),
+            child: CachedNetworkImage(
+              imageUrl: imageUrl,
+              width: 126,
+              height: 126,
+              fit: BoxFit.fill,
+            ),
           ),
           Align(
               alignment: Alignment.topRight,

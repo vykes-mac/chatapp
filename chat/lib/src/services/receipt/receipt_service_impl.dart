@@ -28,9 +28,9 @@ class ReceiptService implements IReceiptService {
   }
 
   @override
-  dispose() {
-    _changefeed?.cancel();
-    _controller?.close();
+  Future<void> dispose() async {
+    await _changefeed?.cancel();
+    await _controller?.close();
   }
 
   _startReceivingReceipts(User user) {
@@ -48,13 +48,21 @@ class ReceiptService implements IReceiptService {
 
                 final receipt = _receiptFromFeed(feedData);
                 _controller.sink.add(receipt);
+                _removeDeliverredReceipt(receipt);
               })
-              .catchError((err) => print(err))
+              .catchError((err) => null)
               .onError((error, stackTrace) => print(error));
         });
   }
 
   Receipt _receiptFromFeed(feedData) {
     return Receipt.fromJson(feedData['new_val']);
+  }
+
+  _removeDeliverredReceipt(Receipt receipt) {
+    _r
+        .table('receipts')
+        .get(receipt.id)
+        .delete({'return_changes': false}).run(_connection);
   }
 }

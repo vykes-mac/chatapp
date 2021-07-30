@@ -20,6 +20,7 @@ class CustomTextField extends StatelessWidget {
     return Container(
       height: height,
       child: TextField(
+        style: Theme.of(context).textTheme.caption,
         keyboardType: TextInputType.text,
         onChanged: onChanged,
         textInputAction: inputAction,

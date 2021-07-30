@@ -2,6 +2,7 @@ import 'package:chatapp/colors.dart';
 import 'package:chatapp/states_mngmt/onboarding/onboarding_cubit.dart';
 import 'package:chatapp/states_mngmt/onboarding/onboarding_state.dart';
 import 'package:chatapp/states_mngmt/onboarding/profile_image_cubit.dart';
+import 'package:chatapp/ui/pages/onboarding/onboarding_router.dart';
 import 'package:chatapp/ui/widgets/oboarding/logo.dart';
 import 'package:chatapp/ui/widgets/oboarding/profile_upload.dart';
 import 'package:chatapp/ui/widgets/shared/custom_text_field.dart';
@@ -10,6 +11,10 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Onboarding extends StatefulWidget {
+  final IOnboardingRouter router;
+
+  const Onboarding(this.router);
+
   @override
   _OnboardingState createState() => _OnboardingState();
 }
@@ -84,10 +89,14 @@ class _OnboardingState extends State<Onboarding> {
                 ),
               ),
               Spacer(),
-              BlocBuilder<OnboardingCubit, OnboardingState>(
+              BlocConsumer<OnboardingCubit, OnboardingState>(
                 builder: (context, state) => state is Loading
                     ? Center(child: CircularProgressIndicator())
                     : Container(),
+                listener: (_, state) {
+                  if (state is OnboardingSuccess)
+                    widget.router.onSessionSuccess(context, state.user);
+                },
               ),
               Spacer(flex: 1)
             ],

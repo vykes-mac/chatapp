@@ -31,9 +31,9 @@ class ReceiptBloc extends Bloc<ReceiptEvent, ReceiptState> {
   }
 
   @override
-  Future<void> close() {
+  Future<void> close() async {
     _subscription?.cancel();
-    _receiptService.dispose();
+    await _receiptService.dispose();
     return super.close();
   }
 }

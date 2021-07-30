@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:chat/chat.dart';
 import 'package:chat/src/models/user.dart';
 import 'package:chat/src/services/typing/typing_notification_service_contract.dart';
 import 'package:flutter/foundation.dart';
@@ -11,8 +12,9 @@ class TypingNotification implements ITypingNotification {
 
   final _controller = StreamController<TypingEvent>.broadcast();
   StreamSubscription _changefeed;
+  IUserService _userService;
 
-  TypingNotification(this._r, this._connection);
+  TypingNotification(this._r, this._connection, this._userService);
 
   @override
   Stream<TypingEvent> subscribe(User user, List<String> userIds) {
@@ -21,8 +23,9 @@ class TypingNotification implements ITypingNotification {
   }
 
   @override
-  Future<bool> send({@required TypingEvent event, @required User to}) async {
-    if (!to.active) return false;
+  Future<bool> send({@required TypingEvent event}) async {
+    final receiver = await _userService.fetch(event.to);
+    if (!receiver.active) return false;
     Map record = await _r
         .table('typing_events')
         .insert(event.toJson(), {'conflict': 'update'}).run(_connection);

@@ -2,20 +2,20 @@ import 'package:chat/chat.dart';
 import 'package:flutter/material.dart';
 
 abstract class IOnboardingRouter {
-  void onSessionSuccess(BuildContext context, User user);
+  void onSessionSuccess(BuildContext context, User me);
 }
 
 class OnboardingRouter implements IOnboardingRouter {
-  final Widget Function(User user) onSessionConnected;
+  final Widget Function(User me) onSessionConnected;
 
   OnboardingRouter({@required this.onSessionConnected});
 
   @override
-  void onSessionSuccess(BuildContext context, User user) {
+  void onSessionSuccess(BuildContext context, User me) {
     Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
-          builder: (_) => onSessionConnected(user),
+          builder: (_) => onSessionConnected(me),
         ),
         (Route<dynamic> route) => false);
   }

@@ -26,6 +26,7 @@ class OnboardingCubit extends Cubit<OnboardingState> {
     final createdUser = await _userService.connect(user);
     final userJson = {
       'username': createdUser.username,
+      'active': true,
       'photo_url': createdUser.photoUrl,
       'id': createdUser.id
     };
