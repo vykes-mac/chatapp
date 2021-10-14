@@ -15,17 +15,20 @@ extension TypingParser on Typing {
 
 class TypingEvent {
   String get id => _id;
+  String chatId;
   final String from;
   final String to;
   final Typing event;
   String _id;
   TypingEvent({
+    @required this.chatId,
     @required this.from,
     @required this.to,
     @required this.event,
   });
 
   Map<String, dynamic> toJson() => {
+        'chat_id': chatId,
         'from': from,
         'to': to,
         'event': event.value(),
@@ -33,6 +36,7 @@ class TypingEvent {
 
   factory TypingEvent.fromJson(Map<String, dynamic> json) {
     var event = TypingEvent(
+      chatId: json['chat_id'],
       from: json['from'],
       to: json['to'],
       event: TypingParser.fromString(json['event']),
@@ -43,7 +47,7 @@ class TypingEvent {
 }
 
 abstract class ITypingNotification {
-  Future<bool> send({@required TypingEvent event});
+  Future<bool> send({@required List<TypingEvent> events});
   Stream<TypingEvent> subscribe(User user, List<String> userIds);
   dispose();
 }

@@ -31,7 +31,7 @@ void main() {
   });
 
   test('returns list of messages from local storage', () async {
-    final chat = Chat('123');
+    final chat = Chat('123', ChatType.individual, membersId: []);
     final localMessage =
         LocalMessage(chat.id, message, ReceiptStatus.deliverred);
     when(mockDatasource.findMessages(chat.id))
@@ -48,7 +48,7 @@ void main() {
   });
 
   test('add new sent message to the chat', () async {
-    final chat = Chat('123');
+    final chat = Chat('123', ChatType.individual, membersId: []);
     final localMessage =
         LocalMessage(chat.id, message, ReceiptStatus.deliverred);
     when(mockDatasource.findMessages(chat.id))
@@ -62,7 +62,7 @@ void main() {
   });
 
   test('add new received message to the chat', () async {
-    final chat = Chat('111');
+    final chat = Chat('111', ChatType.individual, membersId: []);
     final localMessage =
         LocalMessage(chat.id, message, ReceiptStatus.deliverred);
     when(mockDatasource.findMessages(chat.id))
@@ -78,7 +78,7 @@ void main() {
 
   test('create new chat when message received is not apart of this chat',
       () async {
-    final chat = Chat('123');
+    final chat = Chat('123', ChatType.individual, membersId: []);
     final localMessage =
         LocalMessage(chat.id, message, ReceiptStatus.deliverred);
     when(mockDatasource.findMessages(chat.id))

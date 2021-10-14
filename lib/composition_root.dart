@@ -5,8 +5,10 @@ import 'package:chatapp/data/datasources/db_factory.dart';
 import 'package:chatapp/data/datasources/sqflite_datasource.dart';
 import 'package:chatapp/data/services/image_uploader.dart';
 import 'package:chatapp/states_mngmt/home/chats_cubit.dart';
+import 'package:chatapp/states_mngmt/home/group_cubit.dart';
 import 'package:chatapp/states_mngmt/home/home_cubit.dart';
 import 'package:chatapp/states_mngmt/message/message_bloc.dart';
+import 'package:chatapp/states_mngmt/message_group/message_group_bloc.dart';
 import 'package:chatapp/states_mngmt/message_thread/message_thread_cubit.dart';
 import 'package:chatapp/states_mngmt/onboarding/onboarding_cubit.dart';
 import 'package:chatapp/states_mngmt/onboarding/profile_image_cubit.dart';
@@ -17,6 +19,7 @@ import 'package:chatapp/ui/pages/home/home_router.dart';
 import 'package:chatapp/ui/pages/message_thread/message_thread.dart';
 import 'package:chatapp/ui/pages/onboarding/onboarding.dart';
 import 'package:chatapp/ui/pages/onboarding/onboarding_router.dart';
+import 'package:chatapp/ui/widgets/home/create_group.dart';
 import 'package:chatapp/viewmodels/chat_view_model.dart';
 import 'package:chatapp/viewmodels/chats_view_model.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +27,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rethinkdb_dart/rethinkdb_dart.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
+
+import 'models/chat.dart';
 
 class CompositionRoot {
   static SharedPreferences _sharedPreferences;
@@ -39,7 +44,9 @@ class CompositionRoot {
   static ChatsCubit _chatsCubit;
   static MessageBloc _messageBloc;
   static TypingNotificationBloc _typingNotificationBloc;
-
+  static IGroupService _groupService;
+  static MessageGroupBloc _messageGroupBloc;
+  static IHomeRouter _homeRouter;
   static configure() async {
     _sharedPreferences = await SharedPreferences.getInstance();
     _r = Rethinkdb();
@@ -49,11 +56,19 @@ class CompositionRoot {
     _messageService = MessageService(_r, _connection);
     _typingNotification = TypingNotification(_r, _connection, _userService);
     _db = await LocalDatabaseFactory().createDatabase();
+    await _db.delete('chats');
+    await _db.delete('messages');
     _datasource = SqfliteDatasource(_db);
     _viewModel = ChatsViewModel(_datasource, _userService);
     _chatsCubit = ChatsCubit(_viewModel);
     _messageBloc = MessageBloc(_messageService);
     _typingNotificationBloc = TypingNotificationBloc(_typingNotification);
+    _groupService = MessageGroupService(_r, _connection);
+    _messageGroupBloc = MessageGroupBloc(_groupService);
+
+    _homeRouter = HomeRouter(
+        showMessageThread: composeMessageThreadUi,
+        showCreateGroup: composeGroupUi);
   }
 
   static Widget start() {
@@ -86,18 +101,17 @@ class CompositionRoot {
   static Widget composeHomeUi(User me) {
     HomeCubit homeCubit = HomeCubit(_userService, _localCache);
 
-    HomeRouter router = HomeRouter(showMessageThread: composeMessageThreadUi);
-
     return MultiBlocProvider(providers: [
       BlocProvider(create: (BuildContext context) => homeCubit),
       BlocProvider(create: (BuildContext context) => _messageBloc),
       BlocProvider(create: (BuildContext context) => _chatsCubit),
-      BlocProvider(create: (BuildContext context) => _typingNotificationBloc)
-    ], child: Home(_viewModel, router, me));
+      BlocProvider(create: (BuildContext context) => _typingNotificationBloc),
+      BlocProvider(create: (BuildContext context) => _messageGroupBloc)
+    ], child: Home(_viewModel, _homeRouter, me));
   }
 
-  static Widget composeMessageThreadUi(User receiver, User me,
-      {String chatId}) {
+  static Widget composeMessageThreadUi(
+      List<User> receivers, User me, Chat chat) {
     ChatViewModel viewModel = ChatViewModel(_datasource);
     MessageThreadCubit messageThreadCubit = MessageThreadCubit(viewModel);
     IReceiptService receiptService = ReceiptService(_r, _connection);
@@ -108,8 +122,16 @@ class CompositionRoot {
           BlocProvider(create: (BuildContext context) => messageThreadCubit),
           BlocProvider(create: (BuildContext context) => receiptBloc)
         ],
-        child: MessageThread(
-            receiver, me, _messageBloc, _chatsCubit, _typingNotificationBloc,
-            chatId: chatId));
+        child: MessageThread(receivers, me, _messageBloc, _chatsCubit,
+            _typingNotificationBloc, chat));
+  }
+
+  static Widget composeGroupUi(List<User> activeUsers, User me) {
+    GroupCubit groupCubit = GroupCubit();
+    MessageGroupBloc messageGroupBloc = MessageGroupBloc(_groupService);
+    return MultiBlocProvider(providers: [
+      BlocProvider(create: (BuildContext context) => groupCubit),
+      BlocProvider(create: (BuildContext context) => messageGroupBloc),
+    ], child: CreateGroup(activeUsers, me, _chatsCubit, _homeRouter));
   }
 }

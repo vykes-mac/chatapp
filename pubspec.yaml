@@ -28,15 +28,17 @@ dependencies:
   bloc: ^7.0.0
   cached_network_image: ^2.5.1
   cupertino_icons: ^1.0.0
-  equatable: ^2.0.0
-  flutter_bloc: ^7.0.1
+  equatable: ^2.0.3
+  flutter_bloc: ^7.1.0
   google_fonts: ^1.1.2
   http: ^0.12.2
   image_picker: ^0.6.7+22
   intl: ^0.17.0
+  modal_bottom_sheet: ^2.0.0
   path: ^1.8.0
   progress_indicators: ^1.0.0
   rethinkdb_dart: ^2.3.2+6
+  roundcheckbox: ^2.0.1+2
   scrollable_positioned_list: ^0.1.10
   shared_preferences: ^2.0.6
   sqflite: ^2.0.0+3

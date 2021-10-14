@@ -44,7 +44,7 @@ void main() {
       contents: 'this is a message',
     );
 
-    final res = await sut.send(message);
+    final res = await sut.send([message]);
     expect(res, true);
   });
 
@@ -70,8 +70,8 @@ void main() {
       contents: contents,
     );
 
-    await sut.send(message);
-    await sut.send(secondMessage);
+    await sut.send([message]);
+    await sut.send([secondMessage]);
   });
 
   test('successfully subscribe and receive new messages ', () async {
@@ -89,13 +89,13 @@ void main() {
       contents: 'this is another message',
     );
 
-    await sut.send(message);
-    await sut.send(secondMessage).whenComplete(
-          () => sut.messages(activeUser: user2).listen(
-                expectAsync1((message) {
-                  expect(message.to, user2.id);
-                }, count: 2),
-              ),
-        );
+    await sut.send([message]);
+    await sut.send([secondMessage]).whenComplete(
+      () => sut.messages(activeUser: user2).listen(
+            expectAsync1((message) {
+              expect(message.to, user2.id);
+            }, count: 2),
+          ),
+    );
   });
 }

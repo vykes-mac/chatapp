@@ -1,4 +1,5 @@
 import 'package:chat/chat.dart';
+import 'package:chatapp/models/chat.dart';
 import 'package:chatapp/states_mngmt/home/home_cubit.dart';
 import 'package:chatapp/states_mngmt/home/home_state.dart';
 import 'package:chatapp/ui/pages/home/home_router.dart';
@@ -45,8 +46,10 @@ class _ActiveUsersState extends State<ActiveUsers> {
       itemBuilder: (BuildContext context, indx) => GestureDetector(
             child: _listItem(users[indx]),
             onTap: () => this.widget.router.onShowMessageThread(
-                context, users[indx], widget.me,
-                chatId: users[indx].id),
+                context,
+                [users[indx]],
+                widget.me,
+                Chat(users[indx].id, ChatType.individual)),
           ),
       separatorBuilder: (_, __) => Divider(),
       itemCount: users.length);

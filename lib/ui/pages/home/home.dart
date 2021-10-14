@@ -1,7 +1,9 @@
 import 'package:chat/chat.dart';
+import 'package:chatapp/colors.dart';
 import 'package:chatapp/states_mngmt/home/home_cubit.dart';
 import 'package:chatapp/states_mngmt/home/home_state.dart';
 import 'package:chatapp/states_mngmt/message/message_bloc.dart';
+import 'package:chatapp/states_mngmt/message_group/message_group_bloc.dart';
 import 'package:chatapp/ui/pages/home/home_router.dart';
 import 'package:chatapp/ui/widgets/home/active/active_user.dart';
 import 'package:chatapp/ui/widgets/home/chats/chats.dart';
@@ -22,6 +24,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
   User _user;
+  List<User> _activeUsers = [];
 
   @override
   void initState() {
@@ -62,10 +65,14 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
                     child: Align(
                       alignment: Alignment.center,
                       child: BlocBuilder<HomeCubit, HomeState>(
-                          builder: (BuildContext _, state) =>
-                              state is HomeSuccess
-                                  ? Text("Active(${state.onlineUsers.length})")
-                                  : Text("Active(0)")),
+                          builder: (BuildContext _, state) {
+                        if (state is HomeSuccess) {
+                          _activeUsers = state.onlineUsers;
+                          return Text("Active(${state.onlineUsers.length})");
+                        }
+
+                        return Text("Active(0)");
+                      }),
                     ),
                   ),
                 ),
@@ -81,6 +88,16 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
             ],
           ),
         ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: kPrimary,
+          child: Icon(
+            Icons.group_add_rounded,
+            color: Colors.white,
+          ),
+          onPressed: () async {
+            await widget.router.onShowCreateGroup(context, _activeUsers, _user);
+          },
+        ),
       ),
     );
   }
@@ -92,6 +109,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
 
     context.read<HomeCubit>().activeUsers(user);
     context.read<MessageBloc>().add(MessageEvent.onSubscribed(user));
+    context.read<MessageGroupBloc>().add(MessageGroupEvent.onSubscribed(user));
   }
 
   @override

@@ -30,16 +30,16 @@ void main() {
 
   test('should emit typing sent state when typing event is sent', () {
     final typingEvent =
-        TypingEvent(from: '111', to: '222', event: Typing.start);
-    when(typingNotificationService.send(event: typingEvent))
+        TypingEvent(chatId: '123', from: '111', to: '222', event: Typing.start);
+    when(typingNotificationService.send(events: [typingEvent]))
         .thenAnswer((_) async => true);
-    sut.add(TypingNotificationEvent.onTypingEventSent(typingEvent));
+    sut.add(TypingNotificationEvent.onTypingEventSent([typingEvent]));
     expectLater(sut.stream, emits(TypingNotificationState.sent()));
   });
 
   test('should not subscribe if no chats exist', () {
     final typingEvent =
-        TypingEvent(from: '111', to: '222', event: Typing.start);
+        TypingEvent(chatId: '123', from: '111', to: '222', event: Typing.start);
 
     when(typingNotificationService.subscribe(any, any))
         .thenAnswer((_) => Stream.fromIterable([typingEvent]));
@@ -50,7 +50,7 @@ void main() {
   });
   test('should receive typing events from service', () {
     final typingEvent =
-        TypingEvent(from: '111', to: '222', event: Typing.start);
+        TypingEvent(chatId: '123', from: '111', to: '222', event: Typing.start);
 
     when(typingNotificationService.subscribe(any, any))
         .thenAnswer((_) => Stream.fromIterable([typingEvent]));

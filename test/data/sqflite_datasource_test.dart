@@ -33,7 +33,7 @@ void main() {
 
   test('should perform insert of chat to the database', () async {
     //arrange
-    final chat = Chat('1234');
+    final chat = Chat('1234', ChatType.individual, membersId: List.empty());
     when(database.insert('chats', chat.toMap(),
             conflictAlgorithm: ConflictAlgorithm.replace))
         .thenAnswer((_) async => 1);
@@ -66,7 +66,7 @@ void main() {
     //arrange
 
     when(database.transaction(any)).thenAnswer((_) async {
-      return Chat('1');
+      return Chat('1', ChatType.individual, membersId: List.empty());
     });
 
     //act
@@ -81,7 +81,7 @@ void main() {
     //arrange
 
     when(database.transaction(any)).thenAnswer((_) async {
-      return [Chat('1')];
+      return [Chat('1', ChatType.individual, membersId: List.empty())];
     });
 
     //act

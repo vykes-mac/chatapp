@@ -35,7 +35,7 @@ void main() {
   });
 
   test('returns list of chats from local storage', () async {
-    final chat = Chat('123');
+    final chat = Chat('123', ChatType.individual, membersId: []);
     when(mockDatasource.findAllChats()).thenAnswer((_) async => [chat]);
     final chats = await sut.getChats();
     expect(chats, isNotEmpty);
@@ -50,7 +50,7 @@ void main() {
   });
 
   test('add new message to existing chat', () async {
-    final chat = Chat('123');
+    final chat = Chat('123', ChatType.individual, membersId: []);
 
     when(mockDatasource.findChat(any)).thenAnswer((_) async => chat);
     await sut.receivedMessage(message);

@@ -49,4 +49,27 @@ void main() {
     //assert
     expect(users.length, 1);
   });
+
+  test('get fetch online users by ids', () async {
+    final user = User(
+      username: 'test',
+      photoUrl: 'url',
+      active: true,
+      lastSeen: DateTime.now(),
+    );
+
+    final user2 = User(
+      username: 'test',
+      photoUrl: 'url',
+      active: true,
+      lastSeen: DateTime.now(),
+    );
+    //arrange
+    final u1 = await sut.connect(user);
+    final u2 = await sut.connect(user2);
+    //act
+    final users = await sut.fetch([u1.id, u2.id]);
+    //assert
+    expect(users.length, 2);
+  });
 }
