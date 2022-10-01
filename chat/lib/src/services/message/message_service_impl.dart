@@ -3,20 +3,19 @@ import 'dart:async';
 import 'package:chat/src/models/message.dart';
 import 'package:chat/src/models/user.dart';
 import 'package:chat/src/services/encryption/encryption_contract.dart';
-import 'package:flutter/material.dart';
 import 'package:rethink_db_ns/rethink_db_ns.dart';
 
 import 'message_service_contract.dart';
 
 class MessageService implements IMessageService {
-  final Connection _connection;
+  final Connection? _connection;
   final RethinkDb r;
 
   final _controller = StreamController<Message>.broadcast();
-  StreamSubscription _changefeed;
-  final IEncryption _encryption;
+  StreamSubscription? _changefeed;
+  final IEncryption? _encryption;
 
-  MessageService(this.r, this._connection, {IEncryption encryption})
+  MessageService(this.r, this._connection, {IEncryption? encryption})
       : _encryption = encryption;
 
   @override
@@ -24,19 +23,19 @@ class MessageService implements IMessageService {
     final data = messages.map((message) {
       var data = message.toJson();
       if (_encryption != null)
-        data['contents'] = _encryption.encrypt(message.contents);
+        data['contents'] = _encryption!.encrypt(message.contents);
       return data;
     }).toList();
 
-    Map record = await r
+    Map record = await (r
         .table('messages')
-        .insert(data, {'return_changes': true}).run(_connection);
+        .insert(data, {'return_changes': true}).run(_connection!));
 
     return Message.fromJson(record['changes'].first['new_val']);
   }
 
   @override
-  Stream<Message> messages({@required User activeUser}) {
+  Stream<Message> messages({required User activeUser}) {
     _startReceivingMessages(activeUser);
     return _controller.stream;
   }
@@ -44,7 +43,7 @@ class MessageService implements IMessageService {
   @override
   dispose() {
     _changefeed?.cancel();
-    _controller?.close();
+    _controller.close();
   }
 
   _startReceivingMessages(User user) {
@@ -52,7 +51,7 @@ class MessageService implements IMessageService {
         .table('messages')
         .filter({'to': user.id})
         .changes({'include_initial': true})
-        .run(_connection)
+        .run(_connection!)
         .asStream()
         .cast<Feed>()
         .listen((event) {
@@ -65,7 +64,7 @@ class MessageService implements IMessageService {
                 _removeDeliverredMessage(message);
               })
               .catchError((err) => print(err))
-              .onError((error, stackTrace) => print(error));
+              .onError((dynamic error, stackTrace) => print(error));
 
           // await for (var feedData in event) {
           //   if (feedData['new_val'] == null) continue;
@@ -79,7 +78,7 @@ class MessageService implements IMessageService {
   Message _messageFromFeed(feedData) {
     var data = feedData['new_val'];
     if (_encryption != null)
-      data['contents'] = _encryption.decrypt(data['contents']);
+      data['contents'] = _encryption!.decrypt(data['contents']);
     return Message.fromJson(data);
   }
 
@@ -87,6 +86,6 @@ class MessageService implements IMessageService {
     r
         .table('messages')
         .get(message.id)
-        .delete({'return_changes': false}).run(_connection);
+        .delete({'return_changes': false}).run(_connection!);
   }
 }

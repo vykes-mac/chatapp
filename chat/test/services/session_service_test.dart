@@ -7,21 +7,22 @@ import '../services/helpers.dart';
 
 void main() {
   RethinkDb r = RethinkDb();
-  Connection connection;
-  UserService sut;
+  Connection? connection;
+  late UserService sut;
 
   setUp(() async {
-    connection = await r.connect(host: "127.0.0.1", port: 28015);
-    await createDb(r, connection);
+    connection = await r.connect(
+        host: "localhost", port: 28015, user: "admin", password: "");
+    await createDb(r, connection!);
     sut = UserService(r, connection);
   });
 
   tearDown(() async {
-    await cleanDb(r, connection);
+    await cleanDb(r, connection!);
   });
 
   tearDownAll(() {
-    r.dbDrop('test').run(connection).then((value) => print(value));
+    r.dbDrop('test').run(connection!).then((value) => print(value));
   });
 
   test('creates a new user document in database', () async {

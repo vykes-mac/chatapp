@@ -6,11 +6,11 @@ import 'package:chat/src/services/receipt/receipt_service_contract.dart';
 import 'package:rethink_db_ns/rethink_db_ns.dart';
 
 class ReceiptService implements IReceiptService {
-  final Connection _connection;
+  final Connection? _connection;
   final RethinkDb _r;
 
   final _controller = StreamController<Receipt>.broadcast();
-  StreamSubscription _changefeed;
+  StreamSubscription? _changefeed;
 
   ReceiptService(this._r, this._connection);
 
@@ -23,14 +23,14 @@ class ReceiptService implements IReceiptService {
   @override
   Future<bool> send(Receipt receipt) async {
     Map record =
-        await _r.table('receipts').insert(receipt.toJson()).run(_connection);
+        await (_r.table('receipts').insert(receipt.toJson()).run(_connection!));
     return record['inserted'] == 1;
   }
 
   @override
   Future<void> dispose() async {
     await _changefeed?.cancel();
-    await _controller?.close();
+    await _controller.close();
   }
 
   _startReceivingReceipts(User user) {
@@ -38,7 +38,7 @@ class ReceiptService implements IReceiptService {
         .table('receipts')
         .filter({'recipient': user.id})
         .changes({'include_initial': true})
-        .run(_connection)
+        .run(_connection!)
         .asStream()
         .cast<Feed>()
         .listen((event) {
@@ -51,7 +51,7 @@ class ReceiptService implements IReceiptService {
                 _removeDeliverredReceipt(receipt);
               })
               .catchError((err) => null)
-              .onError((error, stackTrace) => print(error));
+              .onError((dynamic error, stackTrace) => print(error));
         });
   }
 
@@ -63,6 +63,6 @@ class ReceiptService implements IReceiptService {
     _r
         .table('receipts')
         .get(receipt.id)
-        .delete({'return_changes': false}).run(_connection);
+        .delete({'return_changes': false}).run(_connection!);
   }
 }

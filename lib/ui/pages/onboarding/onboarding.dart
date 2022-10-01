@@ -7,7 +7,6 @@ import 'package:chatapp/ui/widgets/oboarding/logo.dart';
 import 'package:chatapp/ui/widgets/oboarding/profile_upload.dart';
 import 'package:chatapp/ui/widgets/shared/custom_text_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Onboarding extends StatefulWidget {
@@ -82,7 +81,7 @@ class _OnboardingState extends State<Onboarding> {
                     ),
                   ),
                   style: ElevatedButton.styleFrom(
-                      primary: kPrimary,
+                      backgroundColor: kPrimary,
                       elevation: 5,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(45.0))),

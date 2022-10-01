@@ -8,18 +8,18 @@ import 'helpers.dart';
 
 void main() {
   RethinkDb r = RethinkDb();
-  Connection connection;
-  ReceiptService sut;
+  Connection? connection;
+  late ReceiptService sut;
 
   setUp(() async {
     connection = await r.connect(host: "127.0.0.1", port: 28015);
-    await createDb(r, connection);
+    await createDb(r, connection!);
     sut = ReceiptService(r, connection);
   });
 
   tearDown(() async {
     sut.dispose();
-    await cleanDb(r, connection);
+    await cleanDb(r, connection!);
   });
 
   final user = User.fromJson({

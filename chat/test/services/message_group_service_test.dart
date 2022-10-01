@@ -1,6 +1,4 @@
 import 'package:chat/chat.dart';
-import 'package:chat/src/models/message_group.dart';
-import 'package:chat/src/services/group/group_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:rethink_db_ns/rethink_db_ns.dart';
 
@@ -8,18 +6,18 @@ import 'helpers.dart';
 
 void main() {
   RethinkDb r = RethinkDb();
-  Connection connection;
-  MessageGroupService sut;
+  Connection? connection;
+  late MessageGroupService sut;
 
   setUp(() async {
     connection = await r.connect(host: "127.0.0.1", port: 28015);
-    await createDb(r, connection);
+    await createDb(r, connection!);
     sut = MessageGroupService(r, connection);
   });
 
   tearDown(() async {
     sut.dispose();
-    await cleanDb(r, connection);
+    await cleanDb(r, connection!);
   });
 
   test('create group successfully', () async {

@@ -1,18 +1,16 @@
-import 'package:flutter/material.dart';
-
 class User {
-  String get id => _id;
-  String username;
-  String photoUrl;
-  String _id;
-  bool active;
-  DateTime lastSeen;
+  String? get id => _id;
+  String? username;
+  String? photoUrl;
+  String? _id;
+  bool? active;
+  DateTime? lastSeen;
 
   User({
-    @required this.username,
-    @required this.photoUrl,
-    @required this.active,
-    @required this.lastSeen,
+    required this.username,
+    required this.photoUrl,
+    required this.active,
+    required this.lastSeen,
   }) {
     this.active = active;
     this.lastSeen = lastSeen;

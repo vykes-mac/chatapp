@@ -14,7 +14,6 @@ import 'package:chatapp/ui/widgets/message_thread/receiver_message.dart';
 import 'package:chatapp/ui/widgets/message_thread/sender_message.dart';
 import 'package:chatapp/ui/widgets/shared/header_status.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 

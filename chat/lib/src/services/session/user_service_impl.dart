@@ -1,9 +1,11 @@
+import 'dart:async';
+
 import 'package:chat/src/models/user.dart';
 import 'package:chat/src/services/session/user_service_contract.dart';
 import 'package:rethink_db_ns/rethink_db_ns.dart';
 
 class UserService implements IUserService {
-  final Connection _connection;
+  final Connection? _connection;
   final RethinkDb r;
 
   UserService(this.r, this._connection);
@@ -16,7 +18,7 @@ class UserService implements IUserService {
     final result = await r.table('users').insert(data, {
       'conflict': 'update',
       'return_changes': true,
-    }).run(_connection);
+    }).run(_connection!);
 
     return User.fromJson(result['changes'].first['new_val']);
   }
@@ -27,14 +29,14 @@ class UserService implements IUserService {
       'id': user.id,
       'active': false,
       'last_seen': DateTime.now(),
-    }).run(_connection);
-    _connection.close();
+    }).run(_connection!);
+    _connection!.close();
   }
 
   @override
   Future<List<User>> online() async {
     Cursor users =
-        await r.table('users').filter({'active': true}).run(_connection);
+        await (r.table('users').filter({'active': true}).run(_connection!));
 
     final userList = await users.toList();
     return userList
@@ -45,7 +47,7 @@ class UserService implements IUserService {
   }
 
   @override
-  Future<List<User>> fetch(List<String> ids) async {
+  Future<List<User>> fetch(List<String?> ids) async {
     Cursor users = await r
         .table('users')
         .getAll(r.args(ids))

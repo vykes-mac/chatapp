@@ -1,5 +1,4 @@
 import 'package:chat/src/models/user.dart';
-import 'package:flutter/foundation.dart';
 
 enum Typing { start, stop }
 
@@ -8,23 +7,23 @@ extension TypingParser on Typing {
     return this.toString().split('.').last;
   }
 
-  static Typing fromString(String event) {
+  static Typing fromString(String? event) {
     return Typing.values.firstWhere((element) => element.value() == event);
   }
 }
 
 class TypingEvent {
-  String get id => _id;
-  String chatId;
-  final String from;
-  final String to;
+  String? get id => _id;
+  String? chatId;
+  final String? from;
+  final String? to;
   final Typing event;
-  String _id;
+  String? _id;
   TypingEvent({
-    @required this.chatId,
-    @required this.from,
-    @required this.to,
-    @required this.event,
+    required this.chatId,
+    required this.from,
+    required this.to,
+    required this.event,
   });
 
   Map<String, dynamic> toJson() => {
@@ -47,7 +46,7 @@ class TypingEvent {
 }
 
 abstract class ITypingNotification {
-  Future<bool> send({@required List<TypingEvent> events});
+  Future<bool?> send({required List<TypingEvent> events});
   Stream<TypingEvent> subscribe(User user, List<String> userIds);
   dispose();
 }

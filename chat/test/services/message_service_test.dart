@@ -10,19 +10,19 @@ import 'helpers.dart';
 
 void main() {
   RethinkDb r = RethinkDb();
-  Connection connection;
-  MessageService sut;
+  Connection? connection;
+  late MessageService sut;
 
   setUp(() async {
     connection = await r.connect(host: "127.0.0.1", port: 28015);
     final encryption = EncryptionService(Encrypter(AES(Key.fromLength(32))));
-    await createDb(r, connection);
+    await createDb(r, connection!);
     sut = MessageService(r, connection, encryption: encryption);
   });
 
   tearDown(() async {
     sut.dispose();
-    await cleanDb(r, connection);
+    await cleanDb(r, connection!);
   });
 
   final user = User.fromJson({
@@ -45,7 +45,7 @@ void main() {
     );
 
     final res = await sut.send([message]);
-    expect(res, true);
+    expect(res.id, isNotEmpty);
   });
 
   test('successfully subscribe and receive messages', () async {
