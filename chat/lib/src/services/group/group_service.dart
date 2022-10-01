@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:chat/src/models/message_group.dart';
 import 'package:chat/src/models/user.dart';
 import 'package:flutter/material.dart';
-import 'package:rethinkdb_dart/rethinkdb_dart.dart';
+import 'package:rethink_db_ns/rethink_db_ns.dart';
 
 abstract class IGroupService {
   Future<MessageGroup> create(MessageGroup group);
@@ -13,7 +13,7 @@ abstract class IGroupService {
 
 class MessageGroupService implements IGroupService {
   final Connection _connection;
-  final Rethinkdb r;
+  final RethinkDb r;
 
   final _controller = StreamController<MessageGroup>.broadcast();
   StreamSubscription _changefeed;

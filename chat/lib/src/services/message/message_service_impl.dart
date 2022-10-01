@@ -4,13 +4,13 @@ import 'package:chat/src/models/message.dart';
 import 'package:chat/src/models/user.dart';
 import 'package:chat/src/services/encryption/encryption_contract.dart';
 import 'package:flutter/material.dart';
-import 'package:rethinkdb_dart/rethinkdb_dart.dart';
+import 'package:rethink_db_ns/rethink_db_ns.dart';
 
 import 'message_service_contract.dart';
 
 class MessageService implements IMessageService {
   final Connection _connection;
-  final Rethinkdb r;
+  final RethinkDb r;
 
   final _controller = StreamController<Message>.broadcast();
   StreamSubscription _changefeed;

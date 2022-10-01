@@ -4,12 +4,12 @@ import 'package:chat/src/services/encryption/encryption_service.dart';
 import 'package:chat/src/services/message/message_service_impl.dart';
 import 'package:encrypt/encrypt.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:rethinkdb_dart/rethinkdb_dart.dart';
+import 'package:rethink_db_ns/rethink_db_ns.dart';
 
 import 'helpers.dart';
 
 void main() {
-  Rethinkdb r = Rethinkdb();
+  RethinkDb r = RethinkDb();
   Connection connection;
   MessageService sut;
 

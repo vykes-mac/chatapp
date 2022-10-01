@@ -1,10 +1,10 @@
 import 'package:chat/src/models/user.dart';
 import 'package:chat/src/services/session/user_service_contract.dart';
-import 'package:rethinkdb_dart/rethinkdb_dart.dart';
+import 'package:rethink_db_ns/rethink_db_ns.dart';
 
 class UserService implements IUserService {
   final Connection _connection;
-  final Rethinkdb r;
+  final RethinkDb r;
 
   UserService(this.r, this._connection);
 

@@ -1,14 +1,12 @@
 import 'dart:async';
 
 import 'package:chat/chat.dart';
-import 'package:chat/src/models/user.dart';
-import 'package:chat/src/services/typing/typing_notification_service_contract.dart';
 import 'package:flutter/foundation.dart';
-import 'package:rethinkdb_dart/rethinkdb_dart.dart';
+import 'package:rethink_db_ns/rethink_db_ns.dart';
 
 class TypingNotification implements ITypingNotification {
   final Connection _connection;
-  final Rethinkdb _r;
+  final RethinkDb _r;
 
   final _controller = StreamController<TypingEvent>.broadcast();
   StreamSubscription _changefeed;

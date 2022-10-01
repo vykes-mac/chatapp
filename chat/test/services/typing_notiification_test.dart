@@ -4,14 +4,14 @@ import 'package:chat/src/services/typing/typing_notification.dart';
 import 'package:chat/src/services/typing/typing_notification_service_contract.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:rethinkdb_dart/rethinkdb_dart.dart';
+import 'package:rethink_db_ns/rethink_db_ns.dart';
 
 import 'helpers.dart';
 
 class MockUserService extends Mock implements IUserService {}
 
 void main() {
-  Rethinkdb r = Rethinkdb();
+  RethinkDb r = RethinkDb();
   Connection connection;
   TypingNotification sut;
   MockUserService userService;
