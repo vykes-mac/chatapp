@@ -34,10 +34,10 @@ dependencies:
   http: ^0.12.2
   image_picker: ^0.6.7+22
   intl: ^0.17.0
-  modal_bottom_sheet: ^2.0.0
+  modal_bottom_sheet: ^2.1.2
   path: ^1.8.0
   progress_indicators: ^1.0.0
-  rethinkdb_dart: ^2.3.2+6
+  rethink_db_ns: ^0.0.4
   roundcheckbox: ^2.0.1+2
   scrollable_positioned_list: ^0.1.10
   shared_preferences: ^2.0.6
@@ -46,7 +46,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  mockito: ^4.1.4
+  mockito: ^5.3.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -24,7 +24,7 @@ import 'package:chatapp/viewmodels/chat_view_model.dart';
 import 'package:chatapp/viewmodels/chats_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rethinkdb_dart/rethinkdb_dart.dart';
+import 'package:rethink_db_ns/rethink_db_ns.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -32,7 +32,7 @@ import 'models/chat.dart';
 
 class CompositionRoot {
   static SharedPreferences _sharedPreferences;
-  static Rethinkdb _r;
+  static RethinkDb _r;
   static Connection _connection;
   static IUserService _userService;
   static ILocalCache _localCache;
@@ -49,7 +49,7 @@ class CompositionRoot {
   static IHomeRouter _homeRouter;
   static configure() async {
     _sharedPreferences = await SharedPreferences.getInstance();
-    _r = Rethinkdb();
+    _r = RethinkDb();
     _connection = await _r.connect(host: "127.0.0.1", port: 28015);
     _userService = UserService(_r, _connection);
     _localCache = LocalCache(_sharedPreferences);
